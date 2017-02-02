@@ -271,6 +271,7 @@ a:hover {
 .main-content table th,
 .main-content table td {
 	padding: 0.5rem 1rem;
+	white-space: nowrap;
 	border: 1px solid #e9ebec;
 }
 
@@ -366,6 +367,11 @@ a:hover {
 .btn-red,
 .btn-red:hover {
 	background-color: #f44336;
+}
+
+.table-wrap {
+	width: 100%;
+	overflow-x: auto;
 }
 
 @media screen and (min-width: 64em) {
