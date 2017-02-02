@@ -128,6 +128,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 				var $self = $(this);
 				$self.addClass(opt.classNames.modalVideoClose);
 				$self.off('click');
+				$self.off('keydown');
 				$btn.off('click');
 				setTimeout(function () {
 					$self.remove();
