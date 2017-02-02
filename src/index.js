@@ -109,7 +109,6 @@
 		const arr = ratio.split(':');
 		const width = Number(arr[0]);
 		const height = Number(arr[1]);
-		console.log(width,height);
 		const padding = height * 100 / width;
 		return `${padding}%`;
 	}
