@@ -42,7 +42,21 @@
 		},
 		ratio: '16:9',
 		vimeo: {
-
+			api: false,
+			autopause: true,
+			autoplay: false,
+			byline: true,
+			callback: null,
+			color: null,
+			height: null,
+			loop: false,
+			maxheight: null,
+			maxwidth: null,
+			player_id: null,
+			portrait: true,
+			title: true,
+			width: null,
+			xhtml: false
 		},
 		allowFullScreen: true,
 		animationSpeed: 300,
@@ -75,12 +89,12 @@
 
 	function getYoutubeUrl (youtube, videoId) {
 		const query = getQueryString(youtube);
-		console.log(query);
 		return `//www.youtube.com/embed/${videoId}?${query}`;
 	}
 
 	function getVimeoUrl (vimeo, videoId) {
-		return `//player.vimeo.com/video/${videoId}`;
+		const query = getQueryString(vimeo);
+		return `//player.vimeo.com/video/${videoId}?{query}`;
 	}
 
 	function getVideoUrl (opt,videoId) {
