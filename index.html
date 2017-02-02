@@ -16,6 +16,7 @@
 		<link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
 		<link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
 		<link rel="stylesheet" type="text/css" href="stylesheets/github-light.css" media="screen">
+		<link rel="stylesheet" href="./css/modal-video.min.css">
 	</head>
 	<body>
 		<section class="page-header">
@@ -32,12 +33,238 @@
 			<h2><a id="feature" class="anchor" href="#feature" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Features</h2>
 			<ul>
 				<li>Not affected by dom structure.</li>
+				<li>Beautiful transition</li>
+				<li>Accessible for keyboard navigation and screen readers.</li>
+				<li>Rich option for youtube API and Vimeo API</li>
 			</ul>
 
-			<h2><a id="installation" class="anchor" href="#installation" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Installation</h2>
+			<h2><a id="feature" class="anchor" href="#demo" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Demo</h2>
+
+			<button href="https://github.com/appleple/modal-video" class="btn btn-red js-video-btn" data-video-id='XJS_UYNq4No'>Open Video</button>
+
+			<div class="highlight highlight-text-html-basic"><pre>&lt;<span class="pl-ent">button</span> <span class="pl-e">class</span>=<span class="pl-pds">"</span>js-modal-btn<span class="pl-pds">"</span> <span class="pl-e">data-video-id</span>=<span class="pl-pds">"</span>XJS_UYNq4No<span class="pl-pds">"</span>&gt;Open Video&lt;/<span class="pl-ent">button</span>&gt;</pre></div>
+
+<div class="highlight highlight-source-js"><pre><span class="pl-en">$</span>(<span class="pl-s"><span class="pl-pds">"</span>.js-modal-btn<span class="pl-pds">"</span></span>).<span class="pl-en">modalVideo</span>();</pre></div>
+
+
+
+			<!-- <h2><a id="installation" class="anchor" href="#installation" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Installation</h2> -->
 
 
 			<h2><a id="setup" class="anchor" href="#setup" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Setup</h2>
+			<div class="highlight highlight-text-html-basic"><pre>&lt;<span class="pl-ent">link</span> <span class="pl-e">rel</span>=<span class="pl-s"><span class="pl-pds">"</span>stylesheet<span class="pl-pds">"</span></span> <span class="pl-e">type</span>=<span class="pl-s"><span class="pl-pds">"</span>text/css<span class="pl-pds">"</span></span> <span class="pl-e">href</span>=<span class="pl-s"><span class="pl-pds">"</span>/path/to/modal-video.min.css<span class="pl-pds">"</span></span>&gt;
+&lt;<span class="pl-ent">script</span> <span class="pl-e">src</span>=<span class="pl-s"><span class="pl-pds">"</span>http://code.jquery.com/jquery-2.2.4.min.js<span class="pl-pds">"</span></span>&gt;&lt;/<span class="pl-ent">script</span>&gt;
+&lt;<span class="pl-ent">script</span> <span class="pl-e">src</span>=<span class="pl-s"><span class="pl-pds">"</span>/path/to/modal-video.js<span class="pl-pds">"</span></span>&gt;&lt;/<span class="pl-ent">script</span>&gt;</pre></div>
+
+
+		<h2><a id="feature" class="anchor" href="#demo" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Options</h2>
+		<table style="width:100%;table-layout:fixed;">
+	<tr>
+		<th colspan="2">properties</th>
+		<th>default</th>
+	</tr>
+	<tr>
+		<td colspan="2">channel</td>
+		<td>'youtube'</td>
+	</tr>
+	<tr>
+		<td rowspan="22">youtube</td>
+		<td>autoplay</td>
+		<td>1</td>
+	</tr>
+	<tr>
+		<td>cc_load_policy</td>
+		<td>1</td>
+	</tr>
+	<tr>
+		<td>color</td>
+		<td>null</td>
+	</tr>
+	<tr>
+		<td>controls</td>
+		<td>1</td>
+	</tr>
+	<tr>
+		<td>disablekb</td>
+		<td>0</td>
+	</tr>
+	<tr>
+		<td>enablejsapi</td>
+		<td>0</td>
+	</tr>
+	<tr>
+		<td>end</td>
+		<td>null</td>
+	</tr>
+	<tr>
+		<td>fs</td>
+		<td>1</td>
+	</tr>
+	<tr>
+		<td>h1</td>
+		<td>null</td>
+	</tr>
+	<tr>
+		<td>iv_load_policy</td>
+		<td>1</td>
+	</tr>
+	<tr>
+		<td>list</td>
+		<td>null</td>
+	</tr>
+	<tr>
+		<td>listType</td>
+		<td>null</td>
+	</tr>
+	<tr>
+		<td>loop</td>
+		<td>0</td>
+	</tr>
+	<tr>
+		<td>modestbranding</td>
+		<td>null</td>
+	</tr>
+	<tr>
+		<td>origin</td>
+		<td>null</td>
+	</tr>
+	<tr>
+		<td>playlist</td>
+		<td>null</td>
+	</tr>
+	<tr>
+		<td>playsinline</td>
+		<td>null</td>
+	</tr>
+	<tr>
+		<td>rel</td>
+		<td>0</td>
+	</tr>
+	<tr>
+		<td>showinfo</td>
+		<td>1</td>
+	</tr>
+	<tr>
+		<td>start</td>
+		<td>0</td>
+	</tr>
+	<tr>
+		<td>wmode</td>
+		<td>'transparent'</td>
+	</tr>
+	<tr>
+		<td>theme</td>
+		<td>'dark'</td>
+	</tr>
+	<tr>
+		<td rowspan="15">vimeo</td>
+		<td>api</td>
+		<td>false</td>
+	</tr>
+	<tr>
+		<td>autopause</td>
+		<td>true</td>
+	</tr>
+	<tr>
+		<td>autoplay</td>
+		<td>false</td>
+	</tr>
+	<tr>
+		<td>byline</td>
+		<td>true</td>
+	</tr>
+	<tr>
+		<td>callback</td>
+		<td>null</td>
+	</tr>
+	<tr>
+		<td>color</td>
+		<td>null</td>
+	</tr>
+	<tr>
+		<td>height</td>
+		<td>null</td>
+	</tr>
+	<tr>
+		<td>loop</td>
+		<td>false</td>
+	</tr>
+	<tr>
+		<td>maxheight</td>
+		<td>null</td>
+	</tr>
+	<tr>
+		<td>maxwidth</td>
+		<td>null</td>
+	</tr>
+	<tr>
+		<td>player_id</td>
+		<td>null</td>
+	</tr>
+	<tr>
+		<td>portrait</td>
+		<td>true</td>
+	</tr>
+	<tr>
+		<td>title</td>
+		<td>true</td>
+	</tr>
+	<tr>
+		<td>width</td>
+		<td>null</td>
+	</tr>
+	<tr>
+		<td>xhtml</td>
+		<td>false</td>
+	</tr>
+	<tr>
+		<td colspan="2">ratio</td>
+		<td>'16:9'</td>
+	</tr>
+	<tr>
+		<td colspan="2">allowFullScreen</td>
+		<td>true</td>
+	</tr>
+	<tr>
+		<td colspan="2">animationSpeed</td>
+		<td>300</td>
+	</tr>
+	<tr>
+		<td rowspan="6">classNames</td>
+		<td>modalVideo</td>
+		<td>'modal-video'</td>
+	</tr>
+	<tr>
+		<td>modalVideoClose</td>
+		<td>'modal-video-close'</td>
+	</tr>
+	<tr>
+		<td>modalVideoBody</td>
+		<td>'modal-video-body'</td>
+	</tr>
+	<tr>
+		<td>modalVideoInner</td>
+		<td>'modal-video-inner'</td>
+	</tr>
+	<tr>
+		<td>modalVideoIframeWrap</td>
+		<td>'modal-video-movie-wrap'</td>
+	</tr>
+	<tr>
+		<td>modalVideoCloseBtn</td>
+		<td>'modal-video-close-btn'</td>
+	</tr>
+	<tr>
+		<td rowspan="2">aria</td>
+		<td>openMessage</td>
+		<td>'You just openned the modal video'</td>
+	</tr>
+	<tr>
+		<td>dismissBtnMessage</td>
+		<td>'Close the modal by clicking here'</td>
+	</tr>
+</table>
+
 
 
 			<footer class="site-footer">
@@ -45,5 +272,13 @@
 				<span class="site-footer-credits">This page was generated by <a href="https://pages.github.com">GitHub Pages</a> using the <a href="https://github.com/jasonlong/cayman-theme">Cayman theme</a> by <a href="https://twitter.com/jasonlong">Jason Long</a>.</span>
 			</footer>
 		</section>
+		<script
+  src="https://code.jquery.com/jquery-2.2.4.min.js"
+  integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="
+  crossorigin="anonymous"></script>
+		<script src="./js/modal-video.min.js"></script>
+		<script>
+			$(".js-video-btn").modalVideo();
+		</script>
 	</body>
 </html>

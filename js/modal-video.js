@@ -113,7 +113,6 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 		var arr = ratio.split(':');
 		var width = Number(arr[0]);
 		var height = Number(arr[1]);
-		console.log(width, height);
 		var padding = height * 100 / width;
 		return padding + '%';
 	}

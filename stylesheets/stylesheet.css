@@ -257,7 +257,7 @@ a:hover {
 }
 
 .main-content table {
-	display: block;
+	display: table;
 	width: 100%;
 	overflow: auto;
 	word-break: normal;
@@ -361,6 +361,11 @@ a:hover {
 	width: 86%;
 	height: auto;
 	border: 1px solid #cccccc;
+}
+
+.btn-red,
+.btn-red:hover {
+	background-color: #f44336;
 }
 
 @media screen and (min-width: 64em) {
