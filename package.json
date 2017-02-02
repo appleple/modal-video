@@ -1,0 +1,22 @@
+{
+  "name": "modal-video.js",
+  "version": "0.0.1",
+  "description": "modal-video",
+  "homepage": "http://developer.a-blogcms.jp",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "watch:sass": "nodemon -e scss -x \"npm run sass\"",
+    "js": "uglifyjs ./js/modal-video.js -c -m -o ./js/modal-video.min.js",
+    "sass": "node-sass ./scss/modal-video.scss ./css/modal-video.min.css --output-style compressed",
+    "start": "npm-run-all -p watch:sass js"
+  },
+  "author": "appleple",
+  "license": "appleple",
+  "devDependencies": {
+    "node-sass": "^4.3.0",
+    "nodemon": "^1.11.0",
+    "uglify-js": "^2.7.5",
+    "npm-run-all": "^4.0.1"
+  }
+}
