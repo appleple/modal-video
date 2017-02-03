@@ -1,5 +1,5 @@
 /*!
- * modal-video Ver.0.0.1 (https://www.appleple.com)
+ * modal-video Ver.1.0.0 (https://www.appleple.com)
  * Copyright appleple | MIT License
  *
  */

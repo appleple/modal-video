@@ -3,7 +3,7 @@
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 /*!
- * modal-video Ver.0.0.1 (https://www.appleple.com)
+ * modal-video Ver.1.0.0 (https://www.appleple.com)
  * Copyright appleple | MIT License
  *
  */
