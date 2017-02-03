@@ -115,7 +115,6 @@
 
 	function getHtml(opt,videoId) {
 		const videoUrl = getVideoUrl(opt,videoId);
-		console.log(videoUrl);
 		const padding = getPadding(opt.ratio);
 		return `
 					<div class="${opt.classNames.modalVideo}" tabindex="-1" role="dialog" aria-label="${opt.aria.openMessage}">

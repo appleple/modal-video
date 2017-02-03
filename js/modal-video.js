@@ -119,7 +119,6 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 
 	function getHtml(opt, videoId) {
 		var videoUrl = getVideoUrl(opt, videoId);
-		console.log(videoUrl);
 		var padding = getPadding(opt.ratio);
 		return '\n\t\t\t\t\t<div class="' + opt.classNames.modalVideo + '" tabindex="-1" role="dialog" aria-label="' + opt.aria.openMessage + '">\n\t\t\t\t\t\t<div class="' + opt.classNames.modalVideoBody + '">\n\t\t\t\t\t\t\t<div class="' + opt.classNames.modalVideoInner + '">\n\t\t\t\t\t\t\t\t<div class="' + opt.classNames.modalVideoIframeWrap + '" style="padding-bottom:' + padding + '">\n\t\t\t\t\t\t\t\t\t<button class="' + opt.classNames.modalVideoCloseBtn + ' js-modal-video-dismiss-btn" aria-label="' + opt.aria.dismissBtnMessage + '"/>\n\t\t\t\t\t\t\t\t\t<iframe width=\'460\' height=\'230\' src="' + videoUrl + '" frameborder=\'0\' allowfullscreen=' + opt.allowFullScreen + ' tabindex="-1"/>\n\t\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t</div>\n\t\t\t\t\t</div>\n\t\t\t';
 	}
