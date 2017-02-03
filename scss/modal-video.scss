@@ -1,4 +1,5 @@
 $animation-speed: .3s;
+$animation-function: ease-out;
 $backdrop-color: rgba(0, 0, 0, .5);
 
 @keyframes modal-video {
@@ -31,13 +32,14 @@ $backdrop-color: rgba(0, 0, 0, .5);
 	z-index: 1000000;
 	cursor: pointer;
 	opacity: 1;
+	animation-timing-function: $animation-function;
 	animation-duration: $animation-speed;
 	animation-name: modal-video;
-	-webkit-transition: opacity $animation-speed;
-	-moz-transition: opacity $animation-speed;
-	-ms-transition: opacity $animation-speed;
-	-o-transition: opacity $animation-speed;
-	transition: opacity $animation-speed;
+	-webkit-transition: opacity $animation-speed $animation-function;
+	-moz-transition: opacity $animation-speed $animation-function;
+	-ms-transition: opacity $animation-speed $animation-function;
+	-o-transition: opacity $animation-speed $animation-function;
+	transition: opacity $animation-speed $animation-function;
 }
 
 .modal-video-close {
@@ -72,6 +74,7 @@ $backdrop-color: rgba(0, 0, 0, .5);
 	height: 0;
 	position: relative;
 	padding-bottom: 56.25%;
+	animation-timing-function: $animation-function;
 	animation-duration: $animation-speed;
 	animation-name: modal-video-inner;
 	-webkit-transform: translate(0, 0);
@@ -79,11 +82,11 @@ $backdrop-color: rgba(0, 0, 0, .5);
 	-ms-transform: translate(0, 0);
 	-o-transform: translate(0, 0);
 	transform: translate(0, 0);
-	-webkit-transition: -webkit-transform $animation-speed;
-	-moz-transition: -moz-transform $animation-speed;
-	-ms-transition: -ms-transform $animation-speed;
-	-o-transition: -o-transform $animation-speed;
-	transition: transform $animation-speed;
+	-webkit-transition: -webkit-transform $animation-speed $animation-function;
+	-moz-transition: -moz-transform $animation-speed $animation-function;
+	-ms-transition: -ms-transform $animation-speed $animation-function;
+	-o-transition: -o-transform $animation-speed $animation-function;
+	transition: transform $animation-speed $animation-function;
 
 	& iframe {
 		position: absolute;
