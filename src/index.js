@@ -44,7 +44,7 @@
 		vimeo: {
 			api: false,
 			autopause: true,
-			autoplay: false,
+			autoplay: true,
 			byline: true,
 			callback: null,
 			color: null,
@@ -94,7 +94,7 @@
 
 	function getVimeoUrl (vimeo, videoId) {
 		const query = getQueryString(vimeo);
-		return `//player.vimeo.com/video/${videoId}?{query}`;
+		return `//player.vimeo.com/video/${videoId}?${query}`;
 	}
 
 	function getVideoUrl (opt,videoId) {
@@ -115,6 +115,7 @@
 
 	function getHtml(opt,videoId) {
 		const videoUrl = getVideoUrl(opt,videoId);
+		console.log(videoUrl);
 		const padding = getPadding(opt.ratio);
 		return `
 					<div class="${opt.classNames.modalVideo}" tabindex="-1" role="dialog" aria-label="${opt.aria.openMessage}">

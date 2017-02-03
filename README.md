@@ -153,7 +153,7 @@ About Vimeo options, please refer to https://developer.vimeo.com/apis/oembed
 	</tr>
 	<tr>
 		<td>autoplay</td>
-		<td>false</td>
+		<td>true</td>
 	</tr>
 	<tr>
 		<td>byline</td>
