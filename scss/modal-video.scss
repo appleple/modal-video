@@ -1,6 +1,7 @@
 $animation-speed: .3s;
 $animation-function: ease-out;
 $backdrop-color: rgba(0, 0, 0, .5);
+$modal-bg-color: #333;
 
 @keyframes modal-video {
 	from {
@@ -74,6 +75,7 @@ $backdrop-color: rgba(0, 0, 0, .5);
 	height: 0;
 	position: relative;
 	padding-bottom: 56.25%;
+	background-color: $modal-bg-color;
 	animation-timing-function: $animation-function;
 	animation-duration: $animation-speed;
 	animation-name: modal-video-inner;
