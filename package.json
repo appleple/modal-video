@@ -3,7 +3,7 @@
 	"version": "1.0.0",
 	"description": "modal-video",
 	"homepage": "http://developer.a-blogcms.jp",
-	"main": "index.js",
+	"main": "./js/modal-video.js",
 	"scripts": {
 		"test": "echo \"Error: no test specified\" && exit 1",
 		"js": "npm run babel && npm run uglify",
