@@ -1,28 +1,38 @@
 {
-	"name": "modal-video.js",
-	"version": "1.0.0",
-	"description": "modal-video",
-	"homepage": "http://developer.a-blogcms.jp",
-	"main": "./js/modal-video.js",
-	"scripts": {
-		"test": "echo \"Error: no test specified\" && exit 1",
-		"js": "npm run babel && npm run uglify",
-		"babel": "babel ./src/index.js --out-file ./js/modal-video.js",
-		"uglify": "uglifyjs ./js/modal-video.js > ./js/modal-video.min.js",
-		"sass": "node-sass ./scss/modal-video.scss ./css/modal-video.min.css --output-style compressed",
-		"watch": "nodemon --ignore 'js/*.js' -x \"npm run js && npm run sass\"",
-		"server": "http-server ./",
-		"start": "npm-run-all -p watch server"
-	},
-	"author": "appleple",
-	"license": "appleple",
-	"devDependencies": {
-		"babel-cli": "^6.18.0",
-		"babel-preset-es2015": "^6.18.0",
-		"node-sass": "^4.3.0",
-		"nodemon": "^1.11.0",
-		"npm-run-all": "^4.0.1",
-		"http-server": "^0.9.0",
-		"uglify-js": "^2.7.5"
-	}
+  "name": "modal-video.js",
+  "version": "1.0.0",
+  "description": "modal-video",
+  "homepage": "http://developer.a-blogcms.jp",
+  "main": "./js/modal-video.js",
+  "scripts": {
+    "test": "eslint ./src/core/index.js --fix",
+    "build:js": "npm-run-all -p build:lib build:jquery build:global",
+    "build:lib": "npm run babel",
+    "build:jquery": "browserify ./src/adaptor/jquery.js -t babelify -p licensify -o ./js/jquery-modal-video.js && npm run build:jquery:min",
+    "build:global": "browserify ./src/index.js -t babelify -p licensify --standalone ModalVideo -o ./js/modal-video.js && npm run build:global:min",
+    "build:jquery:min": "uglifyjs ./js/jquery-modal-video.js -m -c --comments -o ./js/jquery-modal-video.min.js",
+    "build:global:min": "uglifyjs ./js/modal-video.js -m -c --comments -o ./js/modal-video.min.js",
+    "build:sass": "npm-run-all -p sass sass:min",
+    "babel": "babel src --out-dir lib",
+    "sass": "node-sass ./scss/modal-video.scss ./css/modal-video.css --output-style expanded",
+    "sass:min": "node-sass ./scss/modal-video.scss ./css/modal-video.min.css --output-style compressed",
+    "watch:js": "onchange \"src/\" -- npm run build:js",
+    "watch:sass": "onchange \"scss\" -- npm run build:sass",
+    "sync": "browser-sync start --server './' --files './js/*.js' './css/*.css' --startPath '/examples/jquery.html'",
+    "start": "npm-run-all -p watch:js watch:sass sync",
+    "patch": "npm run test && npm version patch && npm run build:js",
+    "minor": "npm run test && npm version minor && npm run build:js",
+    "major": "npm run test && npm version major && npm run build:js"
+  },
+  "author": "appleple",
+  "license": "appleple",
+  "devDependencies": {
+    "babel-cli": "^6.18.0",
+    "babel-preset-es2015": "^6.18.0",
+    "node-sass": "^4.3.0",
+    "nodemon": "^1.11.0",
+    "npm-run-all": "^4.0.1",
+    "http-server": "^0.9.0",
+    "uglify-js": "^2.7.5"
+  }
 }
