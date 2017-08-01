@@ -58,64 +58,73 @@ const defaults = {
   }
 }
 
-const getQueryString = (obj) => {
-  let url = "";
-  for (var key in obj) {
-    if (obj.hasOwnProperty(key)) {
-      if (obj[key] !== null) {
-        url += `${key}=${obj[key]}&`;
+export default class ModalVideo {
+
+  constructor (opt) {
+    const selectors = typeof ele === 'string' ? document.querySelectorAll(ele) : ele;
+    [].forEach.call(selectors, (selector, index) => {
+      selector.dataset('video-id', videoId);
+      selector.addEventListener('click', () => {
+        
+      });
+    });
+  }
+
+  getPadding (ratio) {
+    const arr = ratio.split(':');
+    const width = Number(arr[0]);
+    const height = Number(arr[1]);
+    const padding = height * 100 / width;
+    return `${padding}%`;
+  }
+
+  getQueryString (obj) {
+    let url = "";
+    for (var key in obj) {
+      if (obj.hasOwnProperty(key)) {
+        if (obj[key] !== null) {
+          url += `${key}=${obj[key]}&`;
+        }
       }
     }
+    return url.substr(0, url.length - 1);
   }
-  return url.substr(0, url.length - 1);
-}
 
-
-const getYoutubeUrl = (youtube, videoId) => {
-  const query = getQueryString(youtube);
-  return `//www.youtube.com/embed/${videoId}?${query}`;
-}
-
-const getVimeoUrl = (vimeo, videoId) => {
-  const query = getQueryString(vimeo);
-  return `//player.vimeo.com/video/${videoId}?${query}`;
-}
-
-const getVideoUrl = (opt, videoId) => {
-  if (opt.channel === 'youtube') {
-    return getYoutubeUrl(opt.youtube, videoId);
-  } else if (opt.channel === 'vimeo') {
-    return getVimeoUrl(opt.vimeo, videoId);
+  getVideourl (opt, videoId) {
+    if (opt.channel === 'youtube') {
+      return this.getYoutubeUrl(opt.youtube, videoId);
+    } else if (opt.channel === 'vimeo') {
+      return this.getVimeoUrl(opt.vimeo, videoId);
+    }
   }
-}
 
-const getPadding = (ratio) => {
-  const arr = ratio.split(':');
-  const width = Number(arr[0]);
-  const height = Number(arr[1]);
-  const padding = height * 100 / width;
-  return `${padding}%`;
-}
+  getVimeoUrl (vimeo, videoId) {
+    const query = this.getQueryString(vimeo);
+    return `//player.vimeo.com/video/${videoId}?${query}`;
+  }
 
-const getHtml = (opt, videoId) => {
-  const videoUrl = getVideoUrl(opt, videoId);
-  const padding = getPadding(opt.ratio);
-  return (`
-					<div class="${opt.classNames.modalVideo}" tabindex="-1" role="dialog" aria-label="${opt.aria.openMessage}">
-						<div class="${opt.classNames.modalVideoBody}">
-							<div class="${opt.classNames.modalVideoInner}">
-								<div class="${opt.classNames.modalVideoIframeWrap}" style="padding-bottom:${padding}">
-									<button class="${opt.classNames.modalVideoCloseBtn} js-modal-video-dismiss-btn" aria-label="${opt.aria.dismissBtnMessage}"/>
-									<iframe width='460' height='230' src="${videoUrl}" frameborder='0' allowfullscreen=${opt.allowFullScreen} tabindex="-1"/>
-								</div>
-							</div>
-						</div>
-					</div>
-			`);
-}
+  getYoutubeUrl (youtube, videoId) {
+    const query = this.getQueryString(youtube);
+    return `//www.youtube.com/embed/${videoId}?${query}`;
+  }
 
-export default modalVideo = (opt) => {
-  
+  gethtml (opt, videoId) {
+    const videoUrl = this.getVideoUrl(opt, videoId);
+    const padding = this.getPadding(opt.ratio);
+    const classNames = opt.classNames;
+    return (`
+      <div class="${classNames.modalVideo}" tabindex="-1" role="dialog" aria-label="${opt.aria.openMessage}">
+        <div class="${classNames.modalVideoBody}">
+          <div class="${classNames.modalVideoInner}">
+            <div class="${classNames.modalVideoIframeWrap}" style="padding-bottom:${padding}">
+              <button class="${classNames.modalVideoCloseBtn} js-modal-video-dismiss-btn" aria-label="${opt.aria.dismissBtnMessage}"/>
+              <iframe width='460' height='230' src="${videoUrl}" frameborder='0' allowfullscreen=${opt.allowFullScreen} tabindex="-1"/>
+            </div>
+          </div>
+        </div>
+      </div>
+    `);
+  }
 }
 
 
