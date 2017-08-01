@@ -1,3 +1,5 @@
+const assign = require('object.assign').getPolyfill();
+
 const defaults = {
   channel: 'youtube',
   youtube: {
@@ -60,12 +62,13 @@ const defaults = {
 
 export default class ModalVideo {
 
-  constructor (opt) {
+  constructor (args) {
+    const opt = assign({}, defaults, args);
+    const animationSpeed = opt.animationSpeed;
     const selectors = typeof ele === 'string' ? document.querySelectorAll(ele) : ele;
     [].forEach.call(selectors, (selector, index) => {
-      selector.dataset('video-id', videoId);
       selector.addEventListener('click', () => {
-        
+        const html = getHtml(opt, videoId);
       });
     });
   }
