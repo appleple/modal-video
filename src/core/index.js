@@ -132,6 +132,7 @@ export default class ModalVideo {
     } else if (opt.channel === 'vimeo') {
       return this.getVimeoUrl(opt.vimeo, videoId);
     }
+    return '';
   }
 
   getVimeoUrl(vimeo, videoId) {

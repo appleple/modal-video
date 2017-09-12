@@ -210,6 +210,7 @@ var ModalVideo = function () {
       } else if (opt.channel === 'vimeo') {
         return this.getVimeoUrl(opt.vimeo, videoId);
       }
+      return '';
     }
   }, {
     key: 'getVimeoUrl',
