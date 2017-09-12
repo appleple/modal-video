@@ -20,9 +20,7 @@
     "watch:sass": "onchange \"scss\" -- npm run build:sass",
     "sync": "browser-sync start --server './' --files './js/*.js' './css/*.css' --startPath '/test/index.html'",
     "start": "npm-run-all -p watch:js watch:sass sync",
-    "patch": "npm run test && npm version patch && npm run build:js",
-    "minor": "npm run test && npm version minor && npm run build:js",
-    "major": "npm run test && npm version major && npm run build:js"
+    "deploy": "np --no-cleanup"
   },
   "author": "appleple",
   "license": "appleple",
