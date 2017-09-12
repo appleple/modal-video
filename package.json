@@ -18,7 +18,7 @@
     "sass:min": "node-sass ./scss/modal-video.scss ./css/modal-video.min.css --output-style compressed",
     "watch:js": "onchange \"src/\" -- npm run build:js",
     "watch:sass": "onchange \"scss\" -- npm run build:sass",
-    "sync": "browser-sync start --server './' --files './js/*.js' './css/*.css' --startPath '/examples/jquery.html'",
+    "sync": "browser-sync start --server './' --files './js/*.js' './css/*.css' --startPath '/test/index.html'",
     "start": "npm-run-all -p watch:js watch:sass sync",
     "patch": "npm run test && npm version patch && npm run build:js",
     "minor": "npm run test && npm version minor && npm run build:js",
@@ -28,14 +28,35 @@
   "license": "appleple",
   "devDependencies": {
     "babel-cli": "^6.18.0",
+    "babel-plugin-add-module-exports": "^0.2.1",
+    "babel-plugin-transform-es2015-for-of": "^6.23.0",
+    "babel-plugin-transform-html-import-to-string": "^0.0.1",
+    "babel-plugin-transform-runtime": "^6.23.0",
     "babel-preset-es2015": "^6.18.0",
+    "babelify": "^7.3.0",
+    "browser-sync": "^2.18.6",
+    "browserify": "^13.1.1",
+    "co": "^4.6.0",
+    "eslint": "^3.15.0",
+    "eslint-config-airbnb": "^14.1.0",
+    "eslint-plugin-import": "^2.2.0",
+    "fs-extra": "^2.1.2",
     "http-server": "^0.9.0",
+    "licensify": "^3.1.2",
+    "mocha": "^3.3.0",
+    "nightmare": "^2.8.1",
+    "node-cmd": "^2.0.0",
     "node-sass": "^4.3.0",
     "nodemon": "^1.11.0",
-    "npm-run-all": "^4.0.1",
-    "uglify-js": "^2.7.5"
+    "np": "^2.16.0",
+    "npm-run-all": "^4.0.2",
+    "onchange": "^3.2.1",
+    "power-assert": "^1.4.2",
+    "uglify-js": "^2.8.22",
+    "watchify": "^3.9.0"
   },
   "dependencies": {
-    "object.assign": "^4.0.4"
+    "es6-object-assign": "^1.1.0",
+    "es6-promise-polyfill": "^1.2.0"
   }
 }
