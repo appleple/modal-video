@@ -16,14 +16,10 @@
 		<link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
 		<link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
 		<link rel="stylesheet" type="text/css" href="stylesheets/github-light.css" media="screen">
-		<link rel="stylesheet" href="https://rawgit.com/appleple/modal-video/master/css/modal-video.min.css">
+		<link rel="stylesheet" href="https://unpkg.com/modal-video@2.0.1/css/modal-video.min.css">
+		<script src="https://unpkg.com/modal-video@2.0.1/js/modal-video.min.js"></script>
 	</head>
 	<body>
-		<script
-  src="https://code.jquery.com/jquery-2.2.4.min.js"
-  integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="
-  crossorigin="anonymous"></script>
-		<script src="https://rawgit.com/appleple/modal-video/master/js/modal-video.js"></script>
 		<section class="page-header">
 			<img src="./images/icon.svg" width="100">
 			<h1 class="project-name">Modal Video</h1>
@@ -55,7 +51,9 @@
 			<h3>Basic</h3>
 			<button href="https://github.com/appleple/modal-video" class="btn btn-red js-video-btn" data-video-id='7TUOI23spt0'>Open Video</button>
 			<script>
-				$(".js-video-btn").modalVideo();
+			window.addEventListener('DOMContentLoaded',function(){	
+				new ModalVideo(".js-video-btn");
+			});
 			</script>
 
 			<div class="highlight highlight-text-html-basic"><pre>&lt;<span class="pl-ent">button</span> <span class="pl-e">class</span>=<span class="pl-pds">"</span>js-modal-btn<span class="pl-pds">"</span> <span class="pl-e">data-video-id</span>=<span class="pl-pds">"</span>7TUOI23spt0<span class="pl-pds">"</span>&gt;Open Video&lt;/<span class="pl-ent">button</span>&gt;</pre></div>
@@ -66,7 +64,9 @@
 			<h3>Vimeo</h3>
 			<button href="https://github.com/appleple/modal-video" class="btn btn-red js-video-vimeo-btn" data-video-id='202177974'>Open Vimeo</button>
 			<script>
-				$(".js-video-vimeo-btn").modalVideo({channel:'vimeo'});
+			window.addEventListener('DOMContentLoaded',function(){	
+				new ModalVideo(".js-video-btn",{channel:'vimeo'});
+			});
 			</script>
 
 			<div class="highlight highlight-text-html-basic"><pre>&lt;<span class="pl-ent">button</span> <span class="pl-e">class</span>=<span class="pl-pds">"</span>js-modal-btn<span class="pl-pds">"</span> <span class="pl-e">data-video-id</span>=<span class="pl-pds">"</span>202177974<span class="pl-pds">"</span>&gt;Open Vimeo&lt;/<span class="pl-ent">button</span>&gt;</pre></div>
