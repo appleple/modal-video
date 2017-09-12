@@ -1,3 +1,11 @@
+import {
+  append,
+  remove,
+  getUniqId,
+  addClass,
+  triggerEvent
+} from '../lib/util';
+
 const assign = require('es6-object-assign').assign;
 
 const defaults = {
@@ -66,10 +74,39 @@ export default class ModalVideo {
     const opt = assign({}, defaults, option);
     const animationSpeed = opt.animationSpeed;
     const selectors = typeof ele === 'string' ? document.querySelectorAll(ele) : ele;
+    const body = document.querySelector('body');
+    const classNames = opt.classNames;
+    const speed = opt.animationSpeed;
     [].forEach.call(selectors, (selector, index) => {
       selector.addEventListener('click', () => {
         const videoId = selector.dataset.videoId;
-        const html = this.getHtml(opt, videoId);
+        const id = getUniqId();
+        const html = this.getHtml(opt, videoId, id);
+        append(body, html);
+        const modal = document.querySelector(`#${id}`);
+        const btn = modal.querySelector('.js-modal-video-dismiss-btn');
+        modal.focus();
+        modal.addEventListener('click', () => {
+          addClass(modal, classNames.modalVideoClose);
+          setTimeout(() => {
+            remove(modal);
+            selector.focus();
+          },speed);
+        });
+        modal.addEventListener('keydown', (e) => {
+          if (e.which === 9) {
+            e.preventDefault();
+            if (document.activeElement === modal) {
+              btn.focus();
+            }else{
+              modal.setAttribute('aria-label', '');
+              modal.focus();
+            }
+          }
+        });
+        btn.addEventListener('click', () => {
+          triggerEvent(modal, 'click');
+        });
       });
     });
   }
@@ -94,7 +131,7 @@ export default class ModalVideo {
     return url.substr(0, url.length - 1);
   }
 
-  getVideourl (opt, videoId) {
+  getVideoUrl (opt, videoId) {
     if (opt.channel === 'youtube') {
       return this.getYoutubeUrl(opt.youtube, videoId);
     } else if (opt.channel === 'vimeo') {
@@ -112,16 +149,16 @@ export default class ModalVideo {
     return `//www.youtube.com/embed/${videoId}?${query}`;
   }
 
-  gethtml (opt, videoId) {
+  getHtml (opt, videoId, id) {
     const videoUrl = this.getVideoUrl(opt, videoId);
     const padding = this.getPadding(opt.ratio);
     const classNames = opt.classNames;
     return (`
-      <div class="${classNames.modalVideo}" tabindex="-1" role="dialog" aria-label="${opt.aria.openMessage}">
+      <div class="${classNames.modalVideo}" tabindex="-1" role="dialog" aria-label="${opt.aria.openMessage}" id="${id}">
         <div class="${classNames.modalVideoBody}">
           <div class="${classNames.modalVideoInner}">
             <div class="${classNames.modalVideoIframeWrap}" style="padding-bottom:${padding}">
-              <button class="${classNames.modalVideoCloseBtn} js-modal-video-dismiss-btn" aria-label="${opt.aria.dismissBtnMessage}"/>
+              <button class="${classNames.modalVideoCloseBtn} js-modal-video-dismiss-btn" aria-label="${opt.aria.dismissBtnMessage}"></button>
               <iframe width='460' height='230' src="${videoUrl}" frameborder='0' allowfullscreen=${opt.allowFullScreen} tabindex="-1"/>
             </div>
           </div>
@@ -130,5 +167,3 @@ export default class ModalVideo {
     `);
   }
 }
-
-
