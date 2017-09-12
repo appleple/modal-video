@@ -1,5 +1,5 @@
 # Modal Video
-jQuery Modal Video Plugin
+Modal Video Library
 
 ## Features
 
@@ -17,7 +17,7 @@ jQuery Modal Video Plugin
 ```
 
 ```js
-$(".js-modal-btn").modalVideo();
+new ModalVideo('.js-modal-video');
 ```
 
 ### Vimeo
@@ -27,7 +27,7 @@ $(".js-modal-btn").modalVideo();
 ```
 
 ```js
-$(".js-modal-btn").modalVideo({channel:'vimeo'});
+new ModalVideo('.js-modal-video', {channel: 'vimeo'});
 ```
 
 ## Setup
@@ -37,6 +37,7 @@ $(".js-modal-btn").modalVideo({channel:'vimeo'});
 <script src="http://code.jquery.com/jquery-2.2.4.min.js"></script>
 <script src="/path/to/modal-video.js"></script>
 ```
+
 
 ## Options
 
