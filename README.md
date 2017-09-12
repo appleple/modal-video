@@ -8,6 +8,21 @@ Modal Video Library
 - Accessible for keyboard navigation and screen readers.
 - Rich options for youtube API and Vimeo API
 
+## Installation
+- [npm](https://www.npmjs.com/package/modal-video)
+- [standalone](https://raw.githubusercontent.com/appleple/modal-video/master/js/modal-video.js)
+
+via npm
+```shell
+npm install modal-video --save
+```
+
+or yarn
+
+```shell
+yarn add modal-video
+```
+
 ## Short Sample
 
 ### Basic
@@ -27,22 +42,8 @@ new ModalVideo('.js-modal-video');
 ```
 
 ```js
+// import ModalVideo from 'modal-video';
 new ModalVideo('.js-modal-video', {channel: 'vimeo'});
-```
-
-## Installation
-- [npm](https://www.npmjs.com/package/modal-video)
-- [standalone](https://raw.githubusercontent.com/appleple/modal-video/master/js/modal-video.js)
-
-via npm
-```shell
-npm install modal-video --save
-```
-
-or yarn
-
-```shell
-yarn add modal-video
 ```
 
 ## Options
