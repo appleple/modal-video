@@ -30,14 +30,20 @@ new ModalVideo('.js-modal-video');
 new ModalVideo('.js-modal-video', {channel: 'vimeo'});
 ```
 
-## Setup
+## Installation
+- [npm](https://www.npmjs.com/package/modal-video)
+- [standalone](https://raw.githubusercontent.com/appleple/modal-video/master/js/modal-video.js)
 
-```html
-<link rel="stylesheet" type="text/css" href="/path/to/modal-video.min.css">
-<script src="http://code.jquery.com/jquery-2.2.4.min.js"></script>
-<script src="/path/to/modal-video.js"></script>
+via npm
+```shell
+npm install modal-video --save
 ```
 
+or yarn
+
+```shell
+yarn add modal-video
+```
 
 ## Options
 
