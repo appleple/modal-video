@@ -66,18 +66,17 @@ const defaults = {
     openMessage: 'You just openned the modal video',
     dismissBtnMessage: 'Close the modal by clicking here'
   }
-}
+};
 
 export default class ModalVideo {
 
-  constructor (ele, option) {
+  constructor(ele, option) {
     const opt = assign({}, defaults, option);
-    const animationSpeed = opt.animationSpeed;
     const selectors = typeof ele === 'string' ? document.querySelectorAll(ele) : ele;
     const body = document.querySelector('body');
     const classNames = opt.classNames;
     const speed = opt.animationSpeed;
-    [].forEach.call(selectors, (selector, index) => {
+    [].forEach.call(selectors, (selector) => {
       selector.addEventListener('click', () => {
         const videoId = selector.dataset.videoId;
         const id = getUniqId();
@@ -91,14 +90,14 @@ export default class ModalVideo {
           setTimeout(() => {
             remove(modal);
             selector.focus();
-          },speed);
+          }, speed);
         });
         modal.addEventListener('keydown', (e) => {
           if (e.which === 9) {
             e.preventDefault();
             if (document.activeElement === modal) {
               btn.focus();
-            }else{
+            } else {
               modal.setAttribute('aria-label', '');
               modal.focus();
             }
@@ -111,7 +110,7 @@ export default class ModalVideo {
     });
   }
 
-  getPadding (ratio) {
+  getPadding(ratio) {
     const arr = ratio.split(':');
     const width = Number(arr[0]);
     const height = Number(arr[1]);
@@ -119,19 +118,15 @@ export default class ModalVideo {
     return `${padding}%`;
   }
 
-  getQueryString (obj) {
-    let url = "";
-    for (var key in obj) {
-      if (obj.hasOwnProperty(key)) {
-        if (obj[key] !== null) {
-          url += `${key}=${obj[key]}&`;
-        }
-      }
-    }
+  getQueryString(obj) {
+    let url = '';
+    Object.keys(obj).forEach((key) => {
+      url += `${key}=${obj[key]}&`;
+    });
     return url.substr(0, url.length - 1);
   }
 
-  getVideoUrl (opt, videoId) {
+  getVideoUrl(opt, videoId) {
     if (opt.channel === 'youtube') {
       return this.getYoutubeUrl(opt.youtube, videoId);
     } else if (opt.channel === 'vimeo') {
@@ -139,17 +134,17 @@ export default class ModalVideo {
     }
   }
 
-  getVimeoUrl (vimeo, videoId) {
+  getVimeoUrl(vimeo, videoId) {
     const query = this.getQueryString(vimeo);
     return `//player.vimeo.com/video/${videoId}?${query}`;
   }
 
-  getYoutubeUrl (youtube, videoId) {
+  getYoutubeUrl(youtube, videoId) {
     const query = this.getQueryString(youtube);
     return `//www.youtube.com/embed/${videoId}?${query}`;
   }
 
-  getHtml (opt, videoId, id) {
+  getHtml(opt, videoId, id) {
     const videoUrl = this.getVideoUrl(opt, videoId);
     const padding = this.getPadding(opt.ratio);
     const classNames = opt.classNames;
