@@ -79,8 +79,10 @@ export default class ModalVideo {
     [].forEach.call(selectors, (selector) => {
       selector.addEventListener('click', () => {
         const videoId = selector.dataset.videoId;
+        const channel = selector.dataset.channel || opt.channel;
         const id = getUniqId();
-        const html = this.getHtml(opt, videoId, id);
+        const videoUrl = this.getVideoUrl(opt, channel, videoId);
+        const html = this.getHtml(opt, videoUrl, id);
         append(body, html);
         const modal = document.querySelector(`#${id}`);
         const btn = modal.querySelector('.js-modal-video-dismiss-btn');
@@ -126,10 +128,10 @@ export default class ModalVideo {
     return url.substr(0, url.length - 1);
   }
 
-  getVideoUrl(opt, videoId) {
-    if (opt.channel === 'youtube') {
+  getVideoUrl(opt, channel, videoId) {
+    if (channel === 'youtube') {
       return this.getYoutubeUrl(opt.youtube, videoId);
-    } else if (opt.channel === 'vimeo') {
+    } else if (channel === 'vimeo') {
       return this.getVimeoUrl(opt.vimeo, videoId);
     }
     return '';
@@ -145,8 +147,7 @@ export default class ModalVideo {
     return `//www.youtube.com/embed/${videoId}?${query}`;
   }
 
-  getHtml(opt, videoId, id) {
-    const videoUrl = this.getVideoUrl(opt, videoId);
+  getHtml(opt, videoUrl, id) {
     const padding = this.getPadding(opt.ratio);
     const classNames = opt.classNames;
     return (`

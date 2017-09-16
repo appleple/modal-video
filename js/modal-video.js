@@ -6,7 +6,7 @@
  *   license: appleple
  *   author: appleple
  *   homepage: http://developer.a-blogcms.jp
- *   version: 1.0.0
+ *   version: 2.0.2
  *
  * es6-object-assign:
  *   license: MIT (http://opensource.org/licenses/MIT)
@@ -153,8 +153,10 @@ var ModalVideo = function () {
     [].forEach.call(selectors, function (selector) {
       selector.addEventListener('click', function () {
         var videoId = selector.dataset.videoId;
+        var channel = selector.dataset.channel || opt.channel;
         var id = (0, _util.getUniqId)();
-        var html = _this.getHtml(opt, videoId, id);
+        var videoUrl = _this.getVideoUrl(opt, channel, videoId);
+        var html = _this.getHtml(opt, videoUrl, id);
         (0, _util.append)(body, html);
         var modal = document.querySelector('#' + id);
         var btn = modal.querySelector('.js-modal-video-dismiss-btn');
@@ -204,10 +206,10 @@ var ModalVideo = function () {
     }
   }, {
     key: 'getVideoUrl',
-    value: function getVideoUrl(opt, videoId) {
-      if (opt.channel === 'youtube') {
+    value: function getVideoUrl(opt, channel, videoId) {
+      if (channel === 'youtube') {
         return this.getYoutubeUrl(opt.youtube, videoId);
-      } else if (opt.channel === 'vimeo') {
+      } else if (channel === 'vimeo') {
         return this.getVimeoUrl(opt.vimeo, videoId);
       }
       return '';
@@ -226,8 +228,7 @@ var ModalVideo = function () {
     }
   }, {
     key: 'getHtml',
-    value: function getHtml(opt, videoId, id) {
-      var videoUrl = this.getVideoUrl(opt, videoId);
+    value: function getHtml(opt, videoUrl, id) {
       var padding = this.getPadding(opt.ratio);
       var classNames = opt.classNames;
       return '\n      <div class="' + classNames.modalVideo + '" tabindex="-1" role="dialog" aria-label="' + opt.aria.openMessage + '" id="' + id + '">\n        <div class="' + classNames.modalVideoBody + '">\n          <div class="' + classNames.modalVideoInner + '">\n            <div class="' + classNames.modalVideoIframeWrap + '" style="padding-bottom:' + padding + '">\n              <button class="' + classNames.modalVideoCloseBtn + ' js-modal-video-dismiss-btn" aria-label="' + opt.aria.dismissBtnMessage + '"></button>\n              <iframe width=\'460\' height=\'230\' src="' + videoUrl + '" frameborder=\'0\' allowfullscreen=' + opt.allowFullScreen + ' tabindex="-1"/>\n            </div>\n          </div>\n        </div>\n      </div>\n    ';
