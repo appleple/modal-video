@@ -6,7 +6,7 @@ const applyJQuery = (jQuery) => {
   jQuery.fn.modalVideo = function(settings) {
     if (typeof settings === 'strings'){
     } else {
-      new ModalVideo(this.selector,settings);
+      new ModalVideo(this);
     }
     return this;
   }
