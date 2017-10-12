@@ -32,7 +32,8 @@ const defaults = {
     showinfo: 1,
     start: 0,
     wmode: 'transparent',
-    theme: 'dark'
+    theme: 'dark',
+    nocookie: false
   },
   ratio: '16:9',
   vimeo: {
@@ -144,7 +145,12 @@ export default class ModalVideo {
 
   getYoutubeUrl(youtube, videoId) {
     const query = this.getQueryString(youtube);
-    return `//www.youtube.com/embed/${videoId}?${query}`;
+    if (youtube.nocookie === true) {
+      return `//www.youtube-nocookie.com/embed/${videoId}?${query}`;
+    }
+    else {
+      return `//www.youtube.com/embed/${videoId}?${query}`;
+    }
   }
 
   getHtml(opt, videoUrl, id) {

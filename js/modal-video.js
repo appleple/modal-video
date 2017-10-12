@@ -11,6 +11,7 @@
  * es6-object-assign:
  *   license: MIT (http://opensource.org/licenses/MIT)
  *   author: Rubén Norte <rubennorte@gmail.com>
+ *   maintainers: rubennorte <rubennorte@gmail.com>
  *   homepage: https://github.com/rubennorte/es6-object-assign
  *   version: 1.1.0
  *
@@ -103,7 +104,8 @@ var defaults = {
     showinfo: 1,
     start: 0,
     wmode: 'transparent',
-    theme: 'dark'
+    theme: 'dark',
+    nocookie: false
   },
   ratio: '16:9',
   vimeo: {
@@ -224,7 +226,11 @@ var ModalVideo = function () {
     key: 'getYoutubeUrl',
     value: function getYoutubeUrl(youtube, videoId) {
       var query = this.getQueryString(youtube);
-      return '//www.youtube.com/embed/' + videoId + '?' + query;
+      if (youtube.nocookie === true) {
+        return '//www.youtube-nocookie.com/embed/' + videoId + '?' + query;
+      } else {
+        return '//www.youtube.com/embed/' + videoId + '?' + query;
+      }
     }
   }, {
     key: 'getHtml',
