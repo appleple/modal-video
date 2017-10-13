@@ -148,9 +148,8 @@ export default class ModalVideo {
     if (youtube.nocookie === true) {
       return `//www.youtube-nocookie.com/embed/${videoId}?${query}`;
     }
-    else {
-      return `//www.youtube.com/embed/${videoId}?${query}`;
-    }
+
+    return `//www.youtube.com/embed/${videoId}?${query}`;
   }
 
   getHtml(opt, videoUrl, id) {
