@@ -151,6 +151,10 @@ About Vimeo options, please refer to https://developer.vimeo.com/apis/oembed
 		<td>'dark'</td>
 	</tr>
 	<tr>
+		<td>nocookie</td>
+		<td>false</td>
+	</tr>
+	<tr>
 		<td rowspan="15">vimeo</td>
 		<td>api</td>
 		<td>false</td>
