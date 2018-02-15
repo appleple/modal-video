@@ -85,7 +85,7 @@ export default class ModalVideo {
         const videoUrl = this.getVideoUrl(opt, channel, videoId);
         const html = this.getHtml(opt, videoUrl, id);
         append(body, html);
-        const modal = document.querySelector(`#${id}`);
+        const modal = document.getElementById(`${id}`);
         const btn = modal.querySelector('.js-modal-video-dismiss-btn');
         modal.focus();
         modal.addEventListener('click', () => {
