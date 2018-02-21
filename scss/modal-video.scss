@@ -110,6 +110,7 @@ $modal-bg-color: #333;
 	overflow: hidden;
 	border: none;
 	background: transparent;
+	cursor: pointer;
 
 	&:before {
 		transform: rotate(45deg);
