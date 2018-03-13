@@ -5,6 +5,7 @@ import {
   addClass,
   triggerEvent
 } from '../lib/util';
+import '../lib/dom-parser';
 
 const assign = require('es6-object-assign').assign;
 
