@@ -1,3 +1,5 @@
+import 'custom-event-polyfill';
+
 import {
   append,
   remove,
