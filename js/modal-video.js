@@ -129,8 +129,6 @@ require('custom-event-polyfill');
 
 var _util = require('../lib/util');
 
-require('../lib/dom-parser');
-
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 var assign = require('es6-object-assign').assign;
@@ -302,7 +300,7 @@ var ModalVideo = function () {
 exports.default = ModalVideo;
 module.exports = exports['default'];
 
-},{"../lib/dom-parser":5,"../lib/util":6,"custom-event-polyfill":1,"es6-object-assign":2}],4:[function(require,module,exports){
+},{"../lib/util":5,"custom-event-polyfill":1,"es6-object-assign":2}],4:[function(require,module,exports){
 'use strict';
 
 module.exports = require('./core/');
@@ -310,62 +308,15 @@ module.exports = require('./core/');
 },{"./core/":3}],5:[function(require,module,exports){
 'use strict';
 
-/*
- * DOMParser HTML extension
- * 2012-09-04
- *
- * By Eli Grey, http://eligrey.com
- * Public domain.
- * NO WARRANTY EXPRESSED OR IMPLIED. USE AT YOUR OWN RISK.
- */
-
-/*! @source https://gist.github.com/1129031 */
-/* global document, DOMParser */
-(function (DOMParser) {
-  var proto = DOMParser.prototype;
-  var nativeParse = proto.parseFromString;
-
-  // Firefox/Opera/IE throw errors on unsupported types
-  try {
-    // WebKit returns null on unsupported types
-    if (new DOMParser().parseFromString('', 'text/html')) {
-      // text/html parsing is natively supported
-      return;
-    }
-  } catch (ex) {
-    // eslint-disable-line no-empty
-  }
-
-  proto.parseFromString = function (markup, type) {
-    if (/^\s*text\/html\s*(?:;|$)/i.test(type)) {
-      var doc = document.implementation.createHTMLDocument('');
-      if (markup.toLowerCase().indexOf('<!doctype') > -1) {
-        doc.documentElement.innerHTML = markup;
-      } else {
-        doc.body.innerHTML = markup;
-      }
-      return doc;
-    }
-    return nativeParse.apply(this, arguments);
-  };
-})(DOMParser);
-
-},{}],6:[function(require,module,exports){
-'use strict';
-
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
 var append = exports.append = function append(element, string) {
-  var parser = new DOMParser();
-  var doc = parser.parseFromString(string, 'text/html');
-  element.appendChild(doc.querySelector('body').childNodes[0]);
-};
-
-var prepend = exports.prepend = function prepend(element, string) {
-  var parser = new DOMParser();
-  var doc = parser.parseFromString(string, 'text/html');
-  element.insertBefore(doc.querySelector('body').childNodes[0], element.firstChild);
+  var div = document.createElement('div');
+  div.innerHTML = string;
+  while (div.children.length > 0) {
+    element.appendChild(div.children[0]);
+  }
 };
 
 var getUniqId = exports.getUniqId = function getUniqId() {

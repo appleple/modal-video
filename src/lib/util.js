@@ -1,13 +1,9 @@
-export const append = (element, string) => {
-  const parser = new DOMParser();
-  const doc = parser.parseFromString(string, 'text/html');
-  element.appendChild(doc.querySelector('body').childNodes[0]);
-}
-
-export const prepend = (element, string) => {
-  const parser = new DOMParser();
-  const doc = parser.parseFromString(string, 'text/html');
-  element.insertBefore(doc.querySelector('body').childNodes[0], element.firstChild);
+export const append = (element,　string) => {
+  const div = document.createElement('div');
+  div.innerHTML = string;
+  while (div.children.length > 0) {
+    element.appendChild(div.children[0]);
+  }
 }
 
 export const getUniqId = () => {
