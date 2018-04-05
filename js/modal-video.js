@@ -6,7 +6,7 @@
  *   license: appleple
  *   author: appleple
  *   homepage: http://developer.a-blogcms.jp
- *   version: 2.2.2
+ *   version: 2.2.3
  *
  * custom-event-polyfill:
  *   license: MIT (http://opensource.org/licenses/MIT)
@@ -135,6 +135,7 @@ var assign = require('es6-object-assign').assign;
 
 var defaults = {
   channel: 'youtube',
+  facebook: {},
   youtube: {
     autoplay: 1,
     cc_load_policy: 1,
@@ -266,6 +267,8 @@ var ModalVideo = function () {
         return this.getYoutubeUrl(opt.youtube, videoId);
       } else if (channel === 'vimeo') {
         return this.getVimeoUrl(opt.vimeo, videoId);
+      } else if (channel === 'facebook') {
+        return this.getFacebookUrl(opt.facebook, videoId);
       }
       return '';
     }
@@ -284,6 +287,11 @@ var ModalVideo = function () {
       }
 
       return '//www.youtube.com/embed/' + videoId + '?' + query;
+    }
+  }, {
+    key: 'getFacebookUrl',
+    value: function getFacebookUrl(facebook, videoId) {
+      return "//www.facebook.com/v2.10/plugins/video.php?href=" + encodeURIComponent(videoId) + "&" + this.getQueryString(facebook);
     }
   }, {
     key: 'getHtml',

@@ -12,6 +12,7 @@ const assign = require('es6-object-assign').assign;
 
 const defaults = {
   channel: 'youtube',
+	facebook: {},
   youtube: {
     autoplay: 1,
     cc_load_policy: 1,
@@ -136,7 +137,9 @@ export default class ModalVideo {
       return this.getYoutubeUrl(opt.youtube, videoId);
     } else if (channel === 'vimeo') {
       return this.getVimeoUrl(opt.vimeo, videoId);
-    }
+    } else if (channel === 'facebook') {
+			return this.getFacebookUrl(opt.facebook, videoId);
+		}
     return '';
   }
 
@@ -153,6 +156,10 @@ export default class ModalVideo {
 
     return `//www.youtube.com/embed/${videoId}?${query}`;
   }
+
+	getFacebookUrl(facebook, videoId) {
+		return "//www.facebook.com/v2.10/plugins/video.php?href=" + encodeURIComponent(videoId) + "&" + this.getQueryString(facebook);
+	}
 
   getHtml(opt, videoUrl, id) {
     const padding = this.getPadding(opt.ratio);
