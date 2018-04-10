@@ -6,7 +6,7 @@
  *   license: appleple
  *   author: appleple
  *   homepage: http://developer.a-blogcms.jp
- *   version: 2.3.0
+ *   version: 2.3.1
  *
  * custom-event-polyfill:
  *   license: MIT (http://opensource.org/licenses/MIT)
@@ -316,7 +316,7 @@ var ModalVideo = function () {
   }, {
     key: 'getFacebookUrl',
     value: function getFacebookUrl(facebook, videoId) {
-      return '//www.facebook.com/v2.10/plugins/video.php?href=' + encodeURIComponent(videoId) + '&' + this.getQueryString(facebook);
+      return '//www.facebook.com/v2.10/plugins/video.php?href=https://www.facebook.com/facebook/videos/' + videoId + '&' + this.getQueryString(facebook);
     }
   }, {
     key: 'getHtml',

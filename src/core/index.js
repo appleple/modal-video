@@ -158,7 +158,7 @@ export default class ModalVideo {
   }
 
   getFacebookUrl(facebook, videoId) {
-    return `//www.facebook.com/v2.10/plugins/video.php?href=${encodeURIComponent(videoId)}&${this.getQueryString(facebook)}`;
+    return `//www.facebook.com/v2.10/plugins/video.php?href=https://www.facebook.com/facebook/videos/${videoId}&${this.getQueryString(facebook)}`;
   }
 
   getHtml(opt, videoUrl, id) {
