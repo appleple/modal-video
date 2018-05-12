@@ -13,6 +13,27 @@ const assign = require('es6-object-assign').assign;
 const defaults = {
   channel: 'youtube',
   facebook: {},
+  wistia: {
+    autoPlay: false,
+    controlsVisibleOnLoad: true,
+    doNotTrac: true,
+    endVideoBehavior: "default",
+    fullscreenButton: true,
+    googleAnalytics: false,
+    muted: false,
+    playbackRateControl: true,
+    playbar: true,
+    playButton: true,
+    playerColor:"5BB9FB",
+    qualityControl: true,
+    settingsControl: true,
+    silentAutoPlay: 'allow',
+    smallPlayButton: true,
+    videoFoam: true,
+    volume: 1,
+    volumeControl: true,
+    branding: false,
+  },
   youtube: {
     autoplay: 1,
     cc_load_policy: 1,
@@ -139,6 +160,8 @@ export default class ModalVideo {
       return this.getVimeoUrl(opt.vimeo, videoId);
     } else if (channel === 'facebook') {
       return this.getFacebookUrl(opt.facebook, videoId);
+    } else if (channel === 'wistia') {
+      return this.getWistiaUrl(opt.wistia, videoId);
     }
     return '';
   }
@@ -159,6 +182,10 @@ export default class ModalVideo {
 
   getFacebookUrl(facebook, videoId) {
     return `//www.facebook.com/v2.10/plugins/video.php?href=https://www.facebook.com/facebook/videos/${videoId}&${this.getQueryString(facebook)}`;
+  }
+
+  getFacebookUrl(wistia, videoId) {
+    return `//fast.wistia.com/embed/medias/${videoId}?${this.getQueryString(wistia)}`;
   }
 
   getHtml(opt, videoUrl, id) {

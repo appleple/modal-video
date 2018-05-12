@@ -136,6 +136,27 @@ var assign = require('es6-object-assign').assign;
 var defaults = {
   channel: 'youtube',
   facebook: {},
+  wistia: {
+    autoPlay: false,
+    controlsVisibleOnLoad: true,
+    doNotTrac: true,
+    endVideoBehavior: "default",
+    fullscreenButton: true,
+    googleAnalytics: false,
+    muted: false,
+    playbackRateControl: true,
+    playbar: true,
+    playButton: true,
+    playerColor: "5BB9FB",
+    qualityControl: true,
+    settingsControl: true,
+    silentAutoPlay: 'allow',
+    smallPlayButton: true,
+    videoFoam: true,
+    volume: 1,
+    volumeControl: true,
+    branding: false
+  },
   youtube: {
     autoplay: 1,
     cc_load_policy: 1,
@@ -269,6 +290,8 @@ var ModalVideo = function () {
         return this.getVimeoUrl(opt.vimeo, videoId);
       } else if (channel === 'facebook') {
         return this.getFacebookUrl(opt.facebook, videoId);
+      } else if (channel === 'wistia') {
+        return this.getWistiaUrl(opt.wistia, videoId);
       }
       return '';
     }
@@ -292,6 +315,11 @@ var ModalVideo = function () {
     key: 'getFacebookUrl',
     value: function getFacebookUrl(facebook, videoId) {
       return '//www.facebook.com/v2.10/plugins/video.php?href=https://www.facebook.com/facebook/videos/' + videoId + '&' + this.getQueryString(facebook);
+    }
+  }, {
+    key: 'getFacebookUrl',
+    value: function getFacebookUrl(wistia, videoId) {
+      return '//fast.wistia.com/embed/medias/' + videoId + '?' + this.getQueryString(wistia);
     }
   }, {
     key: 'getHtml',
