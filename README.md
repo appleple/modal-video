@@ -52,6 +52,8 @@ About YouTube options, please refer to https://developers.google.com/youtube/pla
 
 About Vimeo options, please refer to https://developer.vimeo.com/apis/oembed
 
+About Wistia options, please refer to https://wistia.com/support/developers/embed-options#options-list
+
 <table style="min-width:100%;">
 	<tbody><tr>
 		<th colspan="2">properties</th>
@@ -213,6 +215,83 @@ About Vimeo options, please refer to https://developer.vimeo.com/apis/oembed
 	</tr>
 	<tr>
 		<td>xhtml</td>
+		<td>false</td>
+	</tr>
+	<tr>
+		<td rowspan="19">Wistia</td>
+		<td>autoPlay</td>
+		<td>false</td>
+	</tr>
+	<tr>
+		<td>controlsVisibleOnLoad</td>
+		<td>true</td>
+	</tr>
+	<tr>
+		<td>doNotTrac</td>
+		<td>true</td>
+	</tr>
+	<tr>
+		<td>endVideoBehavior</td>
+		<td>"default"</td>
+	</tr>
+	<tr>
+		<td>fullscreenButton</td>
+		<td>true</td>
+	</tr>
+	<tr>
+		<td>googleAnalytics</td>
+		<td>false</td>
+	</tr>
+	<tr>
+		<td>muted</td>
+		<td>false</td>
+	</tr>
+	<tr>
+		<td>playbackRateControl</td>
+		<td>true</td>
+	</tr>
+	<tr>
+		<td>playbar</td>
+		<td>true</td>
+	</tr>
+	<tr>
+		<td>playButton</td>
+		<td>true</td>
+	</tr>
+	<tr>
+		<td>playerColor</td>
+		<td>"5BB9FB"</td>
+	</tr>
+	<tr>
+		<td>qualityControl</td>
+		<td>true</td>
+	</tr>
+	<tr>
+		<td>settingsControl</td>
+		<td>true</td>
+	</tr>
+	<tr>
+		<td>silentAutoPlay</td>
+		<td>'allow'</td>
+	</tr>
+	<tr>
+		<td>smallPlayButton</td>
+		<td>true</td>
+	</tr>
+	<tr>
+		<td>videoFoam</td>
+		<td>true</td>
+	</tr>
+	<tr>
+		<td>volume</td>
+		<td>1</td>
+	</tr>
+	<tr>
+		<td>volumeControl</td>
+		<td>true</td>
+	</tr>
+	<tr>
+		<td>branding</td>
 		<td>false</td>
 	</tr>
 	<tr>
