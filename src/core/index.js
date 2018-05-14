@@ -184,7 +184,7 @@ export default class ModalVideo {
     return `//www.facebook.com/v2.10/plugins/video.php?href=https://www.facebook.com/facebook/videos/${videoId}&${this.getQueryString(facebook)}`;
   }
 
-  getFacebookUrl(wistia, videoId) {
+  getWistiaUrl(wistia, videoId) {
     return `//fast.wistia.com/embed/medias/${videoId}?${this.getQueryString(wistia)}`;
   }
 

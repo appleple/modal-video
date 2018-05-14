@@ -317,8 +317,8 @@ var ModalVideo = function () {
       return '//www.facebook.com/v2.10/plugins/video.php?href=https://www.facebook.com/facebook/videos/' + videoId + '&' + this.getQueryString(facebook);
     }
   }, {
-    key: 'getFacebookUrl',
-    value: function getFacebookUrl(wistia, videoId) {
+    key: 'getWistiaUrl',
+    value: function getWistiaUrl(wistia, videoId) {
       return '//fast.wistia.com/embed/medias/' + videoId + '?' + this.getQueryString(wistia);
     }
   }, {
