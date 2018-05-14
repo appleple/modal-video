@@ -6,7 +6,7 @@
  *   license: appleple
  *   author: appleple
  *   homepage: http://developer.a-blogcms.jp
- *   version: 2.3.1
+ *   version: 2.3.2
  *
  * custom-event-polyfill:
  *   license: MIT (http://opensource.org/licenses/MIT)
@@ -136,6 +136,27 @@ var assign = require('es6-object-assign').assign;
 var defaults = {
   channel: 'youtube',
   facebook: {},
+  wistia: {
+    autoPlay: false,
+    controlsVisibleOnLoad: true,
+    doNotTrac: true,
+    endVideoBehavior: "default",
+    fullscreenButton: true,
+    googleAnalytics: false,
+    muted: false,
+    playbackRateControl: true,
+    playbar: true,
+    playButton: true,
+    playerColor: "5BB9FB",
+    qualityControl: true,
+    settingsControl: true,
+    silentAutoPlay: 'allow',
+    smallPlayButton: true,
+    videoFoam: true,
+    volume: 1,
+    volumeControl: true,
+    branding: false
+  },
   youtube: {
     autoplay: 1,
     cc_load_policy: 1,
@@ -208,6 +229,7 @@ var ModalVideo = function () {
     var speed = opt.animationSpeed;
     [].forEach.call(selectors, function (selector) {
       selector.addEventListener('click', function () {
+        (0, _util.addClass)(body, 'modal-video-opened');
         var videoId = selector.dataset.videoId;
         var channel = selector.dataset.channel || opt.channel;
         var id = (0, _util.getUniqId)();
@@ -219,6 +241,7 @@ var ModalVideo = function () {
         modal.focus();
         modal.addEventListener('click', function () {
           (0, _util.addClass)(modal, classNames.modalVideoClose);
+          (0, _util.removeClass)(body, 'modal-video-opened');
           setTimeout(function () {
             (0, _util.remove)(modal);
             selector.focus();
@@ -269,6 +292,8 @@ var ModalVideo = function () {
         return this.getVimeoUrl(opt.vimeo, videoId);
       } else if (channel === 'facebook') {
         return this.getFacebookUrl(opt.facebook, videoId);
+      } else if (channel === 'wistia') {
+        return this.getWistiaUrl(opt.wistia, videoId);
       }
       return '';
     }
@@ -292,6 +317,11 @@ var ModalVideo = function () {
     key: 'getFacebookUrl',
     value: function getFacebookUrl(facebook, videoId) {
       return '//www.facebook.com/v2.10/plugins/video.php?href=https://www.facebook.com/facebook/videos/' + videoId + '&' + this.getQueryString(facebook);
+    }
+  }, {
+    key: 'getWistiaUrl',
+    value: function getWistiaUrl(wistia, videoId) {
+      return '//fast.wistia.com/embed/medias/' + videoId + '?' + this.getQueryString(wistia);
     }
   }, {
     key: 'getHtml',
@@ -354,6 +384,23 @@ var triggerEvent = exports.triggerEvent = function triggerEvent(el, eventName, o
     event.initCustomEvent(eventName, false, false, options);
   }
   el.dispatchEvent(event);
+};
+
+var removeClass = exports.removeClass = function removeClass(element, className) {
+  if (element.classList) {
+    element.classList.remove(className);
+  } else if (hasClass(element, className)) {
+    var reg = new RegExp('(\\s|^)' + className + '(\\s|$)');
+    element.className = element.className.replace(reg, ' ');
+  }
+};
+
+var hasClass = exports.hasClass = function hasClass(element, className) {
+  if (element.classList) {
+    return element.classList.contains(className);
+  } else {
+    return !!element.className.match(new RegExp('(\\s|^)' + className + '(\\s|$)'));
+  }
 };
 
 },{}]},{},[4])(4)
