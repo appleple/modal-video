@@ -254,6 +254,7 @@ var ModalVideo = function () {
     var speed = opt.animationSpeed;
     [].forEach.call(selectors, function (selector) {
       selector.addEventListener('click', function () {
+        (0, _util.addClass)(body, 'modal-video-opened');
         var videoId = selector.dataset.videoId;
         var channel = selector.dataset.channel || opt.channel;
         var id = (0, _util.getUniqId)();
@@ -265,6 +266,7 @@ var ModalVideo = function () {
         modal.focus();
         modal.addEventListener('click', function () {
           (0, _util.addClass)(modal, classNames.modalVideoClose);
+          (0, _util.removeClass)(body, 'modal-video-opened');
           setTimeout(function () {
             (0, _util.remove)(modal);
             selector.focus();
@@ -407,6 +409,23 @@ var triggerEvent = exports.triggerEvent = function triggerEvent(el, eventName, o
     event.initCustomEvent(eventName, false, false, options);
   }
   el.dispatchEvent(event);
+};
+
+var removeClass = exports.removeClass = function removeClass(element, className) {
+  if (element.classList) {
+    element.classList.remove(className);
+  } else if (hasClass(element, className)) {
+    var reg = new RegExp('(\\s|^)' + className + '(\\s|$)');
+    element.className = element.className.replace(reg, ' ');
+  }
+};
+
+var hasClass = exports.hasClass = function hasClass(element, className) {
+  if (element.classList) {
+    return element.classList.contains(className);
+  } else {
+    return !!element.className.match(new RegExp('(\\s|^)' + className + '(\\s|$)'));
+  }
 };
 
 },{}]},{},[3]);

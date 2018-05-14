@@ -5,6 +5,8 @@ import {
   remove,
   getUniqId,
   addClass,
+  removeClass,
+  hasClass,
   triggerEvent
 } from '../lib/util';
 
@@ -103,6 +105,7 @@ export default class ModalVideo {
     const speed = opt.animationSpeed;
     [].forEach.call(selectors, (selector) => {
       selector.addEventListener('click', () => {
+				addClass(body, 'modal-video-opened');
         const videoId = selector.dataset.videoId;
         const channel = selector.dataset.channel || opt.channel;
         const id = getUniqId();
@@ -114,6 +117,7 @@ export default class ModalVideo {
         modal.focus();
         modal.addEventListener('click', () => {
           addClass(modal, classNames.modalVideoClose);
+					removeClass(body, 'modal-video-opened');
           setTimeout(() => {
             remove(modal);
             selector.focus();
