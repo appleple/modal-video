@@ -6,7 +6,7 @@
  *   license: appleple
  *   author: appleple
  *   homepage: http://developer.a-blogcms.jp
- *   version: 2.3.1
+ *   version: 2.3.2
  *
  * custom-event-polyfill:
  *   license: MIT (http://opensource.org/licenses/MIT)
@@ -211,7 +211,7 @@ var ModalVideo = function () {
         var videoId = selector.dataset.videoId;
         var channel = selector.dataset.channel || opt.channel;
         var id = (0, _util.getUniqId)();
-        var videoUrl = _this.getVideoUrl(opt, channel, videoId);
+        var videoUrl = selector.dataset.videoUrl || _this.getVideoUrl(opt, channel, videoId);
         var html = _this.getHtml(opt, videoUrl, id);
         (0, _util.append)(body, html);
         var modal = document.getElementById(id);

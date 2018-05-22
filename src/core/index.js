@@ -85,7 +85,7 @@ export default class ModalVideo {
         const videoId = selector.dataset.videoId;
         const channel = selector.dataset.channel || opt.channel;
         const id = getUniqId();
-        const videoUrl = this.getVideoUrl(opt, channel, videoId);
+        const videoUrl = selector.dataset.videoUrl || this.getVideoUrl(opt, channel, videoId);
         const html = this.getHtml(opt, videoUrl, id);
         append(body, html);
         const modal = document.getElementById(id);
