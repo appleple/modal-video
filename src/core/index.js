@@ -81,9 +81,9 @@ export default class ModalVideo {
     const classNames = opt.classNames;
     const speed = opt.animationSpeed;
     [].forEach.call(selectors, (selector) => {
-      selector.addEventListener('click', (e) => {
+      selector.addEventListener('click', (event) => {
         if (selector.tagName === 'A') {
-          e.preventDefault();
+          event.preventDefault();
         }
         const videoId = selector.dataset.videoId;
         const channel = selector.dataset.channel || opt.channel;

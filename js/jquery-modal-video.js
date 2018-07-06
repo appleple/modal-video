@@ -233,9 +233,9 @@ var ModalVideo = function () {
     var classNames = opt.classNames;
     var speed = opt.animationSpeed;
     [].forEach.call(selectors, function (selector) {
-      selector.addEventListener('click', function (e) {
+      selector.addEventListener('click', function (event) {
         if (selector.tagName === 'A') {
-          e.preventDefault();
+          event.preventDefault();
         }
         var videoId = selector.dataset.videoId;
         var channel = selector.dataset.channel || opt.channel;
