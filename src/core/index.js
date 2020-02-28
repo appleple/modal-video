@@ -57,6 +57,7 @@ const defaults = {
     xhtml: false
   },
   allowFullScreen: true,
+	allowAutoplay: true,
   animationSpeed: 300,
   classNames: {
     modalVideo: 'modal-video',
@@ -173,7 +174,7 @@ export default class ModalVideo {
           <div class="${classNames.modalVideoInner}">
             <div class="${classNames.modalVideoIframeWrap}" style="padding-bottom:${padding}">
               <button class="${classNames.modalVideoCloseBtn} js-modal-video-dismiss-btn" aria-label="${opt.aria.dismissBtnMessage}"></button>
-              <iframe width='460' height='230' src="${videoUrl}" frameborder='0' allowfullscreen=${opt.allowFullScreen} tabindex="-1" allow="autoplay;"/>
+              <iframe width='460' height='230' src="https:${videoUrl}" frameborder='0' allowfullscreen=${opt.allowFullScreen} tabindex="-1" ${opt.allowAutoplay ? 'allow="autoplay"' : ''}/>
             </div>
           </div>
         </div>
