@@ -57,7 +57,7 @@ const defaults = {
     xhtml: false
   },
   allowFullScreen: true,
-	allowAutoplay: true,
+  allowAutoplay: true,
   animationSpeed: 300,
   classNames: {
     modalVideo: 'modal-video',
