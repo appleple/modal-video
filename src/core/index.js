@@ -28,6 +28,7 @@ const defaults = {
     listType: null,
     loop: 0,
     modestbranding: null,
+    mute: 0,
     origin: null,
     playlist: null,
     playsinline: null,
