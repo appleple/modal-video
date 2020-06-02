@@ -195,6 +195,7 @@ var defaults = {
     byline: true,
     callback: null,
     color: null,
+    controls: true,
     height: null,
     loop: false,
     maxheight: null,
