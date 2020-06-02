@@ -119,6 +119,10 @@ About Vimeo options, please refer to https://developer.vimeo.com/apis/oembed
 		<td>null</td>
 	</tr>
 	<tr>
+		<td>mute</td>
+		<td>0</td>
+	</tr>
+	<tr>
 		<td>origin</td>
 		<td>null</td>
 	</tr>
@@ -178,6 +182,10 @@ About Vimeo options, please refer to https://developer.vimeo.com/apis/oembed
 	<tr>
 		<td>color</td>
 		<td>null</td>
+	</tr>
+	<tr>
+		<td>controls</td>
+		<td>true</td>
 	</tr>
 	<tr>
 		<td>height</td>
