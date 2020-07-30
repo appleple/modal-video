@@ -200,6 +200,7 @@ var defaults = {
     loop: false,
     maxheight: null,
     maxwidth: null,
+    muted: false,
     player_id: null,
     portrait: true,
     title: true,
