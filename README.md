@@ -32,7 +32,7 @@ yarn add modal-video
 ```
 
 ```js
-new ModalVideo('.js-modal-video');
+new ModalVideo('.js-modal-btn');
 ```
 
 ### Vimeo
@@ -43,7 +43,7 @@ new ModalVideo('.js-modal-video');
 
 ```js
 // import ModalVideo from 'modal-video';
-new ModalVideo('.js-modal-video', {channel: 'vimeo'});
+new ModalVideo('.js-modal-btn', {channel: 'vimeo'});
 ```
 
 ## Options
