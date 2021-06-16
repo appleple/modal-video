@@ -6,7 +6,7 @@
  *   license: appleple
  *   author: appleple
  *   homepage: http://developer.a-blogcms.jp
- *   version: 2.4.2
+ *   version: 2.4.3
  *
  * custom-event-polyfill:
  *   license: MIT (http://opensource.org/licenses/MIT)
@@ -248,9 +248,23 @@ var ModalVideo = function () {
         (0, _util.append)(body, html);
         var modal = document.getElementById(id);
         var btn = modal.querySelector('.js-modal-video-dismiss-btn');
+        var timeout = void 0; // used for resize
+        var resizeModalVideoWhenHeightGreaterThanWindowHeight = function resizeModalVideoWhenHeightGreaterThanWindowHeight() {
+          clearTimeout(timeout);
+          // Resize modal-video-iframe-wrap when window size changed when the height of the video is greater than the height of the window.
+          timeout = setTimeout(function () {
+            var width = _this.getWidthFulfillAspectRatio(opt.ratio, window.innerHeight, window.innerWidth);
+
+            var modalVideoInner = document.getElementById('modal-video-inner-' + id);
+            if (modalVideoInner.style.maxWidth != width) {
+              modalVideoInner.style.maxWidth = width;
+            }
+          }, 10);
+        };
         modal.focus();
         modal.addEventListener('click', function () {
           (0, _util.addClass)(modal, classNames.modalVideoClose);
+          window.removeEventListener('resize', resizeModalVideoWhenHeightGreaterThanWindowHeight);
           setTimeout(function () {
             (0, _util.remove)(modal);
             selector.focus();
@@ -267,6 +281,7 @@ var ModalVideo = function () {
             }
           }
         });
+        window.addEventListener('resize', resizeModalVideoWhenHeightGreaterThanWindowHeight);
         btn.addEventListener('click', function () {
           (0, _util.triggerEvent)(modal, 'click');
         });
@@ -282,6 +297,41 @@ var ModalVideo = function () {
       var height = Number(arr[1]);
       var padding = height * 100 / width;
       return padding + '%';
+    }
+
+    /**
+     * Calculate the width of the video fulfill aspect ratio.
+     * When the height of the video is greater than the height of the window,
+     * this function return the width that fulfill the aspect ratio for the height of the window.
+     * In other cases, this function return '100%'(the height relative to the width is determined by css).
+     *
+     * @param string ratio
+     * @param number maxHeight
+     * @param number maxWidth
+     * @returns string
+     */
+
+  }, {
+    key: 'getWidthFulfillAspectRatio',
+    value: function getWidthFulfillAspectRatio(ratio, maxHeight, maxWidth) {
+      var arr = ratio.split(':');
+      var width = Number(arr[0]);
+      var height = Number(arr[1]);
+
+      // Height that fulfill the aspect ratio for maxWidth.
+      var videoHeight = maxWidth * (height / width);
+
+      if (maxHeight < videoHeight) {
+        // when the height of the video is greater than the height of the window.
+        // calculate the width that fulfill the aspect ratio for the height of the window.
+
+        // ex: 16:9 aspect ratio
+        // 16:9 = width : height
+        // → width = 16 / 9 * height
+        return Math.floor(width / height * maxHeight) + 'px';
+      }
+
+      return '100%';
     }
   }, {
     key: 'getQueryString',
@@ -330,7 +380,7 @@ var ModalVideo = function () {
     value: function getHtml(opt, videoUrl, id) {
       var padding = this.getPadding(opt.ratio);
       var classNames = opt.classNames;
-      return '\n      <div class="' + classNames.modalVideo + '" tabindex="-1" role="dialog" aria-label="' + opt.aria.openMessage + '" id="' + id + '">\n        <div class="' + classNames.modalVideoBody + '">\n          <div class="' + classNames.modalVideoInner + '">\n            <div class="' + classNames.modalVideoIframeWrap + '" style="padding-bottom:' + padding + '">\n              <button class="' + classNames.modalVideoCloseBtn + ' js-modal-video-dismiss-btn" aria-label="' + opt.aria.dismissBtnMessage + '"></button>\n              <iframe width=\'460\' height=\'230\' src="https:' + videoUrl + '" frameborder=\'0\' allowfullscreen=' + opt.allowFullScreen + ' tabindex="-1" ' + (opt.allowAutoplay ? 'allow="autoplay"' : '') + '/>\n            </div>\n          </div>\n        </div>\n      </div>\n    ';
+      return '\n      <div class="' + classNames.modalVideo + '" tabindex="-1" role="dialog" aria-label="' + opt.aria.openMessage + '" id="' + id + '">\n        <div class="' + classNames.modalVideoBody + '">\n          <div class="' + classNames.modalVideoInner + '" id="modal-video-inner-' + id + '">\n            <div class="' + classNames.modalVideoIframeWrap + '" style="padding-bottom:' + padding + '">\n              <button class="' + classNames.modalVideoCloseBtn + ' js-modal-video-dismiss-btn" aria-label="' + opt.aria.dismissBtnMessage + '"></button>\n              <iframe width=\'460\' height=\'230\' src="https:' + videoUrl + '" frameborder=\'0\' allowfullscreen=' + opt.allowFullScreen + ' tabindex="-1" ' + (opt.allowAutoplay ? 'allow="autoplay"' : '') + '/>\n            </div>\n          </div>\n        </div>\n      </div>\n    ';
     }
   }]);
 
