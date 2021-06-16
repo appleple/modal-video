@@ -256,7 +256,7 @@ var ModalVideo = function () {
             var width = _this.getWidthFulfillAspectRatio(opt.ratio, window.innerHeight, window.innerWidth);
 
             var modalVideoInner = document.getElementById('modal-video-inner-' + id);
-            if (modalVideoInner.style.maxWidth != width) {
+            if (modalVideoInner.style.maxWidth !== width) {
               modalVideoInner.style.maxWidth = width;
             }
           }, 10);

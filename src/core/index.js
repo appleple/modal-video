@@ -97,23 +97,23 @@ export default class ModalVideo {
         append(body, html);
         const modal = document.getElementById(id);
         const btn = modal.querySelector('.js-modal-video-dismiss-btn');
-				let timeout; // used for resize
-				const resizeModalVideoWhenHeightGreaterThanWindowHeight = () => {
-					clearTimeout(timeout);
-					// Resize modal-video-iframe-wrap when window size changed when the height of the video is greater than the height of the window.
-					timeout = setTimeout(() => {
-						const width = this.getWidthFulfillAspectRatio(opt.ratio, window.innerHeight, window.innerWidth);
+        let timeout; // used for resize
+        const resizeModalVideoWhenHeightGreaterThanWindowHeight = () => {
+          clearTimeout(timeout);
+          // Resize modal-video-iframe-wrap when window size changed when the height of the video is greater than the height of the window.
+          timeout = setTimeout(() => {
+            const width = this.getWidthFulfillAspectRatio(opt.ratio, window.innerHeight, window.innerWidth);
 
-						const modalVideoInner = document.getElementById(`modal-video-inner-${id}`);
-						if (modalVideoInner.style.maxWidth != width) {
-							modalVideoInner.style.maxWidth = width;
-						}
-					}, 10);
-				}
+            const modalVideoInner = document.getElementById(`modal-video-inner-${id}`);
+            if (modalVideoInner.style.maxWidth !== width) {
+              modalVideoInner.style.maxWidth = width;
+            }
+          }, 10);
+        };
         modal.focus();
         modal.addEventListener('click', () => {
           addClass(modal, classNames.modalVideoClose);
-					window.removeEventListener('resize', resizeModalVideoWhenHeightGreaterThanWindowHeight);
+          window.removeEventListener('resize', resizeModalVideoWhenHeightGreaterThanWindowHeight);
           setTimeout(() => {
             remove(modal);
             selector.focus();
@@ -130,7 +130,7 @@ export default class ModalVideo {
             }
           }
         });
-				window.addEventListener('resize', resizeModalVideoWhenHeightGreaterThanWindowHeight);
+        window.addEventListener('resize', resizeModalVideoWhenHeightGreaterThanWindowHeight);
         btn.addEventListener('click', () => {
           triggerEvent(modal, 'click');
         });
@@ -146,43 +146,44 @@ export default class ModalVideo {
     return `${padding}%`;
   }
 
-	/**
-	 * Calculate the width of the video fulfill aspect ratio.
-	 * When the height of the video is greater than the height of the window,
-	 * this function return the width that fulfill the aspect ratio for the height of the window.
-	 * In other cases, this function return '100%'(the height relative to the width is determined by css).
-	 *
-	 * @param string ratio
-	 * @param number maxHeight
-	 * @param number maxWidth
-	 * @returns string
-	 */
-	getWidthFulfillAspectRatio(ratio, maxHeight, maxWidth) {
-		const arr = ratio.split(':');
-		const width = Number(arr[0]);
-		const height = Number(arr[1]);
+  /**
+   * Calculate the width of the video fulfill aspect ratio.
+   * When the height of the video is greater than the height of the window,
+   * this function return the width that fulfill the aspect ratio for the height of the window.
+   * In other cases, this function return '100%'(the height relative to the width is determined by css).
+   *
+   * @param string ratio
+   * @param number maxHeight
+   * @param number maxWidth
+   * @returns string
+   */
+  getWidthFulfillAspectRatio(ratio, maxHeight, maxWidth) {
+    const arr = ratio.split(':');
+    const width = Number(arr[0]);
+    const height = Number(arr[1]);
 
-		// Height that fulfill the aspect ratio for maxWidth.
-		const videoHeight = maxWidth * (height / width);
+    // Height that fulfill the aspect ratio for maxWidth.
+    const videoHeight = maxWidth * (height / width);
 
-		if (maxHeight < videoHeight) {
-			// when the height of the video is greater than the height of the window.
-			// calculate the width that fulfill the aspect ratio for the height of the window.
+    if (maxHeight < videoHeight) {
+      // when the height of the video is greater than the height of the window.
+      // calculate the width that fulfill the aspect ratio for the height of the window.
 
-			// ex: 16:9 aspect ratio
-			// 16:9 = width : height
-			// → width = 16 / 9 * height
-			return `${Math.floor(width / height * maxHeight)}px`;
-		}
+      // ex: 16:9 aspect ratio
+      // 16:9 = width : height
+      // → width = 16 / 9 * height
+      return `${Math.floor(width / height * maxHeight)}px`;
+    }
 
-		return '100%';
-	}
+    return '100%';
+  }
 
   getQueryString(obj) {
     let url = '';
-    Object.keys(obj).forEach((key) => {
-      url += `${key}=${obj[key]}&`;
-    });
+    Object.keys(obj)
+      .forEach((key) => {
+        url += `${key}=${obj[key]}&`;
+      });
     return url.substr(0, url.length - 1);
   }
 
