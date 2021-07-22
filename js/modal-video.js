@@ -6,12 +6,12 @@
  *   license: appleple
  *   author: appleple
  *   homepage: http://developer.a-blogcms.jp
- *   version: 2.4.3
+ *   version: 2.4.4
  *
  * custom-event-polyfill:
  *   license: MIT (http://opensource.org/licenses/MIT)
- *   contributors: Frank Panetta, Mikhail Reenko <reenko@yandex.ru>, Joscha Feth <joscha@feth.com>
- *   homepage: https://github.com/krambuhl/custom-event-polyfill#readme
+ *   author: NO AUTHOR!
+ *   contributors: Frank Panetta (http://www.savvi.io), Mikhail Reenko <reenko@yandex.ru>, Joscha Feth <joscha@feth.com> (http://www.feth.com)
  *   version: 0.3.0
  *
  * es6-object-assign:
@@ -147,13 +147,10 @@ var defaults = {
     fs: 1,
     h1: null,
     iv_load_policy: 1,
-    list: null,
-    listType: null,
     loop: 0,
     modestbranding: null,
     mute: 0,
     origin: null,
-    playlist: null,
     playsinline: null,
     rel: 0,
     showinfo: 1,
