@@ -10,8 +10,8 @@
  *
  * custom-event-polyfill:
  *   license: MIT (http://opensource.org/licenses/MIT)
- *   author: NO AUTHOR!
- *   contributors: Frank Panetta (http://www.savvi.io), Mikhail Reenko <reenko@yandex.ru>, Joscha Feth <joscha@feth.com> (http://www.feth.com)
+ *   contributors: Frank Panetta, Mikhail Reenko <reenko@yandex.ru>, Joscha Feth <joscha@feth.com>
+ *   homepage: https://github.com/krambuhl/custom-event-polyfill#readme
  *   version: 0.3.0
  *
  * es6-object-assign:
@@ -323,6 +323,8 @@ var ModalVideo = function () {
         return this.getVimeoUrl(opt.vimeo, videoId);
       } else if (channel === 'facebook') {
         return this.getFacebookUrl(opt.facebook, videoId);
+      } else if (channel === 'custom') {
+        return opt.url;
       }
       return '';
     }
