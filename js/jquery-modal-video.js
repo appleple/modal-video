@@ -6,7 +6,7 @@
  *   license: appleple
  *   author: appleple
  *   homepage: http://developer.a-blogcms.jp
- *   version: 2.4.5
+ *   version: 2.4.6
  *
  * custom-event-polyfill:
  *   license: MIT (http://opensource.org/licenses/MIT)
