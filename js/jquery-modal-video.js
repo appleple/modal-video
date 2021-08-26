@@ -348,6 +348,8 @@ var ModalVideo = function () {
         return this.getVimeoUrl(opt.vimeo, videoId);
       } else if (channel === 'facebook') {
         return this.getFacebookUrl(opt.facebook, videoId);
+      } else if (channel === 'custom') {
+        return opt.url;
       }
       return '';
     }

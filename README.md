@@ -46,6 +46,26 @@ new ModalVideo('.js-modal-btn');
 new ModalVideo('.js-modal-btn', {channel: 'vimeo'});
 ```
 
+### MP4
+
+```html
+<button class="js-modal-btn" data-video-url="https://developer.a-blogcms.jp/themes/developer/movies/280.mp4">Open Video</button>
+```
+
+```js
+new ModalVideo('.js-modal-btn');
+```
+
+OR
+
+```html
+<button class="js-modal-btn" data-channel="custom">Open Video</button>
+```
+
+```js
+new ModalVideo('.js-modal-btn', {url: 'https://developer.a-blogcms.jp/themes/developer/movies/280.mp4'});
+```
+
 ## Options
 
 About YouTube options, please refer to https://developers.google.com/youtube/player_parameters?hl=en
@@ -218,6 +238,11 @@ About Vimeo options, please refer to https://developer.vimeo.com/apis/oembed
 	<tr>
 		<td>width</td>
 		<td>null</td>
+	</tr>
+	<tr>
+		<td rowspan="1">custom</td>
+		<td>url</td>
+		<td>MP4 URL</td>
 	</tr>
 	<tr>
 		<td>xhtml</td>
