@@ -224,7 +224,7 @@ export default class ModalVideo {
           <div class="${classNames.modalVideoInner}" id="modal-video-inner-${id}">
             <div class="${classNames.modalVideoIframeWrap}" style="padding-bottom:${padding}">
               <button class="${classNames.modalVideoCloseBtn} js-modal-video-dismiss-btn" aria-label="${opt.aria.dismissBtnMessage}"></button>
-              <iframe width='460' height='230' src="https:${videoUrl}" frameborder='0' allowfullscreen=${opt.allowFullScreen} tabindex="-1" ${opt.allowAutoplay ? 'allow="autoplay"' : ''}/>
+              <iframe width='460' height='230' src="${videoUrl}" frameborder='0' allowfullscreen=${opt.allowFullScreen} tabindex="-1" allow="${opt.allowAutoplay ? 'autoplay;' : ''} accelerometer; encrypted-media; gyroscope; picture-in-picture" />
             </div>
           </div>
         </div>
