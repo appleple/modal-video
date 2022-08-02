@@ -299,7 +299,7 @@ About Vimeo options, please refer to https://developer.vimeo.com/apis/oembed
 
 
 ## FAQ
-### How to track YouTube videos playing in modal-video with Google Tag Manager?</h3>
+### How to track YouTube videos playing in modal-video by GA4?</h3>
 
 1. Enable JS API. Turn `enablejsapi` property to `1`.
 2. Load YouTube Iframe API. Add `<script src="https://www.youtube.com/iframe_api"></script>` in HTML file.
