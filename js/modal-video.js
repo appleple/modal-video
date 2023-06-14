@@ -6,7 +6,7 @@
  *   license: appleple
  *   author: appleple
  *   homepage: http://developer.a-blogcms.jp
- *   version: 2.4.6
+ *   version: 2.4.8
  *
  * custom-event-polyfill:
  *   license: MIT (http://opensource.org/licenses/MIT)
@@ -312,6 +312,7 @@ var ModalVideo = function () {
       Object.keys(obj).forEach(function (key) {
         url += key + '=' + obj[key] + '&';
       });
+      console.log(url);
       return url.substr(0, url.length - 1);
     }
   }, {

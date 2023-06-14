@@ -181,6 +181,7 @@ export default class ModalVideo {
       .forEach((key) => {
         url += `${key}=${obj[key]}&`;
       });
+      console.log(url)
     return url.substr(0, url.length - 1);
   }
 
