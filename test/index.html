@@ -8,23 +8,36 @@
 	<title>modal-video.js</title>
 </head>
 <body>
-	 <button class="js-video-button" data-video-id='202177974' data-channel="vimeo">Vimeo</button>
-	 <button class="js-video-button" data-video-id='L61p2uyiMSo'>Youtube</button>
-	 <button class="js-video-button" data-channel="facebook" data-video-id="10153231379946729">Facebook</button>
-	 <a href="#" class="js-video-button" data-channel="custom">video</a>
-	<script
+  <button class="js-video-button" data-video-id='202177974' data-channel="vimeo">Vimeo</button>
+  <button class="js-video-button youtube" data-video-id='L61p2uyiMSo'>Youtube</button>
+  <button class="js-video-button" data-channel="facebook" data-video-id="10153231379946729">Facebook</button>
+  <a href="#" class="js-video-button" data-channel="custom">video</a>
+
+  <script src="../js/modal-video.js"></script>
+	<!-- <script
 	src="https://code.jquery.com/jquery-2.2.4.min.js"
 	integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="
 	crossorigin="anonymous"></script>
-	<script src="../js/jquery-modal-video.min.js"></script>
+  <script src="../js/jquery-modal-video.js"></script> -->
+
 	<script>
-		$(".js-video-button").modalVideo({
-			youtube:{
-				controls:0,
-				nocookie: true
-			},
+    const modalVideo = new ModalVideo(".js-video-button", {
+      youtube: {
+        controls: 0,
+        nocookie: true
+      },
       url: "https://developer.a-blogcms.jp/themes/developer/movies/280.mp4"
-		});
+    })
+    // modalVideo.destroy()
+    // modalVideo.reAdd()
+
+		// $(".js-video-button").modalVideo({
+		// 	youtube: {
+		// 		controls: 0,
+		// 		nocookie: true
+		// 	},
+    //   url: "https://developer.a-blogcms.jp/themes/developer/movies/280.mp4"
+		// });
 	</script>
 </body>
 </html>

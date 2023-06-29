@@ -18,7 +18,7 @@
     "sass:min": "node-sass ./scss/modal-video.scss ./css/modal-video.min.css --output-style compressed",
     "watch:js": "onchange \"src/\" -- npm run build:js",
     "watch:sass": "onchange \"scss\" -- npm run build:sass",
-    "sync": "browser-sync start --server './' --files './js/*.js' './css/*.css' --startPath '/test/index.html'",
+    "sync": "browser-sync start --config bs-config.js",
     "start": "npm-run-all -p watch:js watch:sass sync",
     "deploy": "np --no-cleanup"
   },
@@ -56,6 +56,7 @@
   "dependencies": {
     "babel-preset-flow": "^6.23.0",
     "custom-event-polyfill": "^0.3.0",
+    "deepmerge": "^4.3.1",
     "es6-object-assign": "^1.1.0",
     "es6-promise-polyfill": "^1.2.0"
   }

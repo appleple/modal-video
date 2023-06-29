@@ -1,4 +1,4 @@
-export const append = (element,　string) => {
+export const append = (element, string) => {
   const div = document.createElement('div');
   div.innerHTML = string;
   while (div.children.length > 0) {
