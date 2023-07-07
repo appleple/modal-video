@@ -318,8 +318,6 @@ var defaults = {
 
 var ModalVideo = function () {
   function ModalVideo(ele, option) {
-    var _this = this;
-
     _classCallCheck(this, ModalVideo);
 
     // Member variable
@@ -329,16 +327,13 @@ var ModalVideo = function () {
     this.selectors = typeof ele === 'string' ? document.querySelectorAll(ele) : ele;
 
     // Main methods
-    // this.opt.handleClassName.modalVideoSelector = ele.substring(0, 1) === '.' ? ele.slice(1) : ele;
-    Array.from(this.selectors).forEach(function (selector) {
-      selector.addEventListener('click', _this.boundIsModal);
-    });
+    this.add();
   }
 
   _createClass(ModalVideo, [{
     key: 'isModal',
     value: function isModal(event) {
-      var _this2 = this;
+      var _this = this;
 
       var selector = event.target;
       if (selector.tagName === 'A') {
@@ -363,20 +358,20 @@ var ModalVideo = function () {
         clearTimeout(timeout);
         // Resize modal-video-iframe-wrap when window size changed when the height of the video is greater than the height of the window.
         timeout = setTimeout(function () {
-          var width = _this2.getWidthFulfillAspectRatio(_this2.opt.ratio, window.innerHeight, window.innerWidth);
-          var modalVideoInner = document.getElementById('modal-video-inner-' + _this2.id);
+          var width = _this.getWidthFulfillAspectRatio(_this.opt.ratio, window.innerHeight, window.innerWidth);
+          var modalVideoInner = document.getElementById('modal-video-inner-' + _this.id);
           if (modalVideoInner.style.maxWidth !== width) {
             modalVideoInner.style.maxWidth = width;
           }
         }, 10);
       };
       modal.addEventListener('click', function () {
-        (0, _util.addClass)(modal, _this2.opt.classNames.modalVideoClose);
+        (0, _util.addClass)(modal, _this.opt.classNames.modalVideoClose);
         window.removeEventListener('resize', resizeModalVideoWhenHeightGreaterThanWindowHeight());
         setTimeout(function () {
           (0, _util.remove)(modal);
           selector.focus();
-        }, _this2.opt.animationSpeed);
+        }, _this.opt.animationSpeed);
       });
       modal.addEventListener('keydown', function (e) {
         if (e.which === 9) {
@@ -476,23 +471,27 @@ var ModalVideo = function () {
       return '//www.facebook.com/v2.10/plugins/video.php?href=https://www.facebook.com/facebook/videos/' + videoId + '&' + this.getQueryString(facebook);
     }
   }, {
-    key: 'reAdd',
-    value: function reAdd() {
-      var _this3 = this;
+    key: 'add',
+    value: function add() {
+      var _this2 = this;
 
-      this.selectors = typeof this.selectors === 'string' ? document.querySelectorAll(this.selectors) : this.selectors;
+      var eacquisition = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : false;
+
+      if (eacquisition) {
+        this.selectors = typeof this.selectors === 'string' ? document.querySelectorAll(this.selectors) : this.selectors;
+      }
+      console.log(this.selectors);
       Array.from(this.selectors).forEach(function (selector) {
-        selector.addEventListener('click', _this3.boundIsModal);
+        selector.addEventListener('click', _this2.boundIsModal);
       });
     }
   }, {
     key: 'destroy',
     value: function destroy() {
-      var _this4 = this;
+      var _this3 = this;
 
-      this.selectors = typeof this.selectors === 'string' ? document.querySelectorAll(this.selectors) : this.selectors;
       Array.from(this.selectors).forEach(function (selector) {
-        selector.removeEventListener('click', _this4.boundIsModal);
+        selector.removeEventListener('click', _this3.boundIsModal);
       });
     }
   }, {

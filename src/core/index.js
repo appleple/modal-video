@@ -86,10 +86,7 @@ export default class ModalVideo {
     this.selectors = typeof ele === 'string' ? document.querySelectorAll(ele) : ele;
 
     // Main methods
-    // this.opt.handleClassName.modalVideoSelector = ele.substring(0, 1) === '.' ? ele.slice(1) : ele;
-    Array.from(this.selectors).forEach(selector => {
-      selector.addEventListener('click', this.boundIsModal);
-    });
+    this.add();
   }
 
   isModal(event) {
@@ -222,15 +219,17 @@ export default class ModalVideo {
     return `//www.facebook.com/v2.10/plugins/video.php?href=https://www.facebook.com/facebook/videos/${videoId}&${this.getQueryString(facebook)}`;
   }
 
-  reAdd() {
-    this.selectors = typeof  this.selectors === 'string' ? document.querySelectorAll( this.selectors) :  this.selectors;
+  add(eacquisition = false) {
+    if(eacquisition) {
+      this.selectors = typeof  this.selectors === 'string' ? document.querySelectorAll( this.selectors) :  this.selectors;
+    }
+    console.log(this.selectors)
     Array.from(this.selectors).forEach(selector => {
       selector.addEventListener('click', this.boundIsModal);
     });
   }
 
   destroy() {
-    this.selectors = typeof  this.selectors === 'string' ? document.querySelectorAll( this.selectors) :  this.selectors;
     Array.from(this.selectors).forEach(selector => {
       selector.removeEventListener('click', this.boundIsModal);
     });
