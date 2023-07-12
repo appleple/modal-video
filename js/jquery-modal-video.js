@@ -323,7 +323,7 @@ var ModalVideo = function () {
     // Member variable
     this.opt = (0, _deepmerge2.default)(defaults, option);
     this.id = (0, _util.getUniqId)();
-    this.boundIsModal = this.isModal.bind(this);
+    this.modal = this.onClick.bind(this);
     this.selectors = typeof ele === 'string' ? document.querySelectorAll(ele) : ele;
 
     // Main methods
@@ -331,8 +331,8 @@ var ModalVideo = function () {
   }
 
   _createClass(ModalVideo, [{
-    key: 'isModal',
-    value: function isModal(event) {
+    key: 'onClick',
+    value: function onClick(event) {
       var _this = this;
 
       var selector = event.target;
@@ -475,14 +475,13 @@ var ModalVideo = function () {
     value: function add() {
       var _this2 = this;
 
-      var eacquisition = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : false;
+      var isUpdateSelectors = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : false;
 
-      if (eacquisition) {
+      if (isUpdateSelectors) {
         this.selectors = typeof this.selectors === 'string' ? document.querySelectorAll(this.selectors) : this.selectors;
       }
-      console.log(this.selectors);
       Array.from(this.selectors).forEach(function (selector) {
-        selector.addEventListener('click', _this2.boundIsModal);
+        selector.addEventListener('click', _this2.modal);
       });
     }
   }, {
@@ -491,7 +490,7 @@ var ModalVideo = function () {
       var _this3 = this;
 
       Array.from(this.selectors).forEach(function (selector) {
-        selector.removeEventListener('click', _this3.boundIsModal);
+        selector.removeEventListener('click', _this3.modal);
       });
     }
   }, {
