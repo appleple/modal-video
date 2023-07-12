@@ -1,4 +1,5 @@
 import 'custom-event-polyfill';
+import deepmerge from 'deepmerge';
 
 import {
   append,
@@ -8,7 +9,7 @@ import {
   triggerEvent
 } from '../lib/util';
 
-const assign = require('es6-object-assign').assign;
+// const assign = require('es6-object-assign').assign;
 
 const defaults = {
   channel: 'youtube',
@@ -65,95 +66,99 @@ const defaults = {
     modalVideoBody: 'modal-video-body',
     modalVideoInner: 'modal-video-inner',
     modalVideoIframeWrap: 'modal-video-movie-wrap',
-    modalVideoCloseBtn: 'modal-video-close-btn'
+    modalVideoCloseBtn: 'modal-video-close-btn',
+  },
+  handleClassName: {
+    modalVideoDismissBtn: 'js-modal-video-dismiss-btn',
   },
   aria: {
     openMessage: 'You just openned the modal video',
     dismissBtnMessage: 'Close the modal by clicking here'
-  }
+  },
 };
 
 export default class ModalVideo {
-
   constructor(ele, option) {
-    const opt = assign({}, defaults, option);
-    const selectors = typeof ele === 'string' ? document.querySelectorAll(ele) : ele;
-    const body = document.querySelector('body');
-    const classNames = opt.classNames;
-    const speed = opt.animationSpeed;
-    [].forEach.call(selectors, (selector) => {
-      selector.addEventListener('click', (event) => {
-        if (selector.tagName === 'A') {
-          event.preventDefault();
-        }
-        const videoId = selector.dataset.videoId;
-        const channel = selector.dataset.channel || opt.channel;
-        const id = getUniqId();
-        const videoUrl = selector.dataset.videoUrl || this.getVideoUrl(opt, channel, videoId);
-        const html = this.getHtml(opt, videoUrl, id);
-        append(body, html);
-        const modal = document.getElementById(id);
-        const btn = modal.querySelector('.js-modal-video-dismiss-btn');
-        let timeout; // used for resize
-        const resizeModalVideoWhenHeightGreaterThanWindowHeight = () => {
-          clearTimeout(timeout);
-          // Resize modal-video-iframe-wrap when window size changed when the height of the video is greater than the height of the window.
-          timeout = setTimeout(() => {
-            const width = this.getWidthFulfillAspectRatio(opt.ratio, window.innerHeight, window.innerWidth);
+    // Member variable
+    this.opt = deepmerge(defaults, option);
+    this.id = getUniqId();
+    this.modal = this.onClick.bind(this);
+    this.selectors = typeof ele === 'string' ? document.querySelectorAll(ele) : ele;
 
-            const modalVideoInner = document.getElementById(`modal-video-inner-${id}`);
-            if (modalVideoInner.style.maxWidth !== width) {
-              modalVideoInner.style.maxWidth = width;
-            }
-          }, 10);
-        };
-        modal.focus();
-        modal.addEventListener('click', () => {
-          addClass(modal, classNames.modalVideoClose);
-          window.removeEventListener('resize', resizeModalVideoWhenHeightGreaterThanWindowHeight);
-          setTimeout(() => {
-            remove(modal);
-            selector.focus();
-          }, speed);
-        });
-        modal.addEventListener('keydown', (e) => {
-          if (e.which === 9) {
-            e.preventDefault();
-            if (document.activeElement === modal) {
-              btn.focus();
-            } else {
-              modal.setAttribute('aria-label', '');
-              modal.focus();
-            }
-          }
-        });
-        window.addEventListener('resize', resizeModalVideoWhenHeightGreaterThanWindowHeight);
-        btn.addEventListener('click', () => {
-          triggerEvent(modal, 'click');
-        });
-      });
+    // Main methods
+    this.add();
+  }
+
+  onClick(event) {
+    const selector = event.target;
+    if (selector.tagName === 'A') {
+      event.preventDefault();
+    }
+
+    // modal append
+    const videoId = event.target.dataset.videoId;
+    const channel = selector.dataset.channel || this.opt.channel;
+    const videoUrl = selector.dataset.videoUrl || this.getVideoUrl(this.opt, channel, videoId);
+    const body = document.querySelector('body');
+    const html = this.getHtml(videoUrl);
+    append(body, html);
+
+    // modal Handling
+    const modal = document.getElementById(this.id);
+    const btn = modal.querySelector(`.${this.opt.handleClassName.modalVideoDismissBtn}`);
+    modal.focus();
+
+    let timeout; // used for resize
+    const resizeModalVideoWhenHeightGreaterThanWindowHeight = () => {
+      clearTimeout(timeout);
+      // Resize modal-video-iframe-wrap when window size changed when the height of the video is greater than the height of the window.
+      timeout = setTimeout(() => {
+        const width = this.getWidthFulfillAspectRatio(this.opt.ratio, window.innerHeight, window.innerWidth);
+        const modalVideoInner = document.getElementById(`modal-video-inner-${this.id}`);
+        if (modalVideoInner.style.maxWidth !== width) {
+          modalVideoInner.style.maxWidth = width;
+        }
+      }, 10);
+    };
+    modal.addEventListener('click', () => {
+      addClass(modal, this.opt.classNames.modalVideoClose);
+      window.removeEventListener('resize', resizeModalVideoWhenHeightGreaterThanWindowHeight());
+      setTimeout(() => {
+        remove(modal);
+        selector.focus();
+      }, this.opt.animationSpeed);
+    });
+    modal.addEventListener('keydown', (e) => {
+      if (e.which === 9) {
+        e.preventDefault();
+        if (document.activeElement === modal) {
+          btn.focus();
+        } else {
+          modal.setAttribute('aria-label', '');
+          modal.focus();
+        }
+      }
+      if(e.key === 'Escape') {
+        triggerEvent(modal, 'click');
+      }
+    });
+    window.addEventListener('resize', resizeModalVideoWhenHeightGreaterThanWindowHeight());
+    btn.addEventListener('click', () => {
+      triggerEvent(modal, 'click');
     });
   }
 
-  getPadding(ratio) {
-    const arr = ratio.split(':');
-    const width = Number(arr[0]);
-    const height = Number(arr[1]);
-    const padding = height * 100 / width;
-    return `${padding}%`;
-  }
-
   /**
-   * Calculate the width of the video fulfill aspect ratio.
-   * When the height of the video is greater than the height of the window,
-   * this function return the width that fulfill the aspect ratio for the height of the window.
-   * In other cases, this function return '100%'(the height relative to the width is determined by css).
-   *
-   * @param string ratio
-   * @param number maxHeight
-   * @param number maxWidth
-   * @returns string
-   */
+ * Calculate the width of the video fulfill aspect ratio.
+ * When the height of the video is greater than the height of the window,
+ * this function return the width that fulfill the aspect ratio for the height of the window.
+ * In other cases, this function return '100%'(the height relative to the width is determined by css).
+ *
+ * @param string ratio
+ * @param number maxHeight
+ * @param number maxWidth
+ * @returns string
+ */
   getWidthFulfillAspectRatio(ratio, maxHeight, maxWidth) {
     const arr = ratio.split(':');
     const width = Number(arr[0]);
@@ -181,7 +186,6 @@ export default class ModalVideo {
       .forEach((key) => {
         url += `${key}=${obj[key]}&`;
       });
-      console.log(url)
     return url.substr(0, url.length - 1);
   }
 
@@ -208,7 +212,6 @@ export default class ModalVideo {
     if (youtube.nocookie === true) {
       return `//www.youtube-nocookie.com/embed/${videoId}?${query}`;
     }
-
     return `//www.youtube.com/embed/${videoId}?${query}`;
   }
 
@@ -216,16 +219,40 @@ export default class ModalVideo {
     return `//www.facebook.com/v2.10/plugins/video.php?href=https://www.facebook.com/facebook/videos/${videoId}&${this.getQueryString(facebook)}`;
   }
 
-  getHtml(opt, videoUrl, id) {
-    const padding = this.getPadding(opt.ratio);
-    const classNames = opt.classNames;
+  add(isUpdateSelectors = false) {
+    if(isUpdateSelectors) {
+      this.selectors = typeof  this.selectors === 'string' ? document.querySelectorAll( this.selectors) :  this.selectors;
+    }
+    Array.from(this.selectors).forEach(selector => {
+      selector.addEventListener('click', this.modal);
+    });
+  }
+
+  destroy() {
+    Array.from(this.selectors).forEach(selector => {
+      selector.removeEventListener('click', this.modal);
+    });
+  }
+
+  getPadding(ratio) {
+    const arr = ratio.split(':');
+    const width = Number(arr[0]);
+    const height = Number(arr[1]);
+    const padding = height * 100 / width;
+    return `${padding}%`;
+  }
+
+  getHtml(videoUrl) {
+    const padding = this.getPadding(this.opt.ratio);
+
     return (`
-      <div class="${classNames.modalVideo}" tabindex="-1" role="dialog" aria-label="${opt.aria.openMessage}" id="${id}">
-        <div class="${classNames.modalVideoBody}">
-          <div class="${classNames.modalVideoInner}" id="modal-video-inner-${id}">
-            <div class="${classNames.modalVideoIframeWrap}" style="padding-bottom:${padding}">
-              <button class="${classNames.modalVideoCloseBtn} js-modal-video-dismiss-btn" aria-label="${opt.aria.dismissBtnMessage}"></button>
-              <iframe width='460' height='230' src="${videoUrl}" frameborder='0' allowfullscreen=${opt.allowFullScreen} tabindex="-1" allow="${opt.allowAutoplay ? 'autoplay;' : ''} accelerometer; encrypted-media; gyroscope; picture-in-picture" />
+      <div class="${this.opt.classNames.modalVideo}" tabindex="-1" role="dialog" aria-label="${this.opt.aria.openMessage}" id="${this.id}">
+        <div class="${this.opt.classNames.modalVideoBody}">
+          <div class="${this.opt.classNames.modalVideoInner}" id="modal-video-inner-${this.id}">
+            <div class="${this.opt.classNames.modalVideoIframeWrap}" style="padding-bottom:${padding}">
+            <button class="${this.opt.classNames.modalVideoCloseBtn} ${this.opt.handleClassName.modalVideoDismissBtn}" aria-label="${this.opt.aria.dismissBtnMessage}"></button>
+              <iframe width='460' height='230' src="${videoUrl}" frameborder='0' allowfullscreen=${this.opt.allowFullScreen} tabindex="-1" allow="${this.opt.allowAutoplay ? 'autoplay;' : ''} accelerometer; encrypted-media; gyroscope; picture-in-picture" />
+
             </div>
           </div>
         </div>
